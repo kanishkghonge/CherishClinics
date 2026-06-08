@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book an Appointment - Cherish Children's Clinic</title>
+  <meta name="description" content="Schedule a consultation at Cherish Children's Clinic. Book In-Clinic or Telehealth visits with Dr. Jyothirmayi Kavipurapu or Dr. Rohan Sharma.">
+  <meta name="keywords" content="book pediatrician online, child specialist scheduler hyderabad, telehealth pediatrician, clinic slot booking kondapur">
+  <meta name="author" content="Dr. K Jyothirmayi">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="photos/logo.jpg">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Background blobs -->
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="bg-blob bg-blob-3"></div>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/919986777109?text=Hello%20Cherish%20Children's%20Clinic,%20I'd%20like%20to%20inquire%20about%20booking%20an%20appointment." 
+     target="_blank" 
+     class="whatsapp-widget" 
+     aria-label="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Header Navigation -->
+  <header id="main-header">
+    <div class="logo-container">
+      <img src="photos/logo.jpg" alt="Cherish Clinic Logo" class="logo-img">
+      <h1>
+        Cherish
+        <span class="clinic-sub">Children's Clinic</span>
+      </h1>
+    </div>
+    
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Our Services</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      
+      <!-- Resources Dropdown -->
+      <div class="dropdown">
+        <a href="resources.html" class="nav-link">Resources <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i></a>
+        <div class="dropdown-menu">
+          <a href="bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+          <a href="milestones-blog.html" class="dropdown-item">Developmental Blog</a>
+        </div>
+      </div>
+      
+      <a href="contact.html" class="nav-link">Contact Us</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/doc_mom_jyo/?hl=en" target="_blank" class="social-icon instagram" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919986777109" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <a href="booking.html" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Book Online</a>
+    </div>
+
+    <!-- Hamburger Menu Toggle (Mobile) -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-drawer">
+    <button class="mobile-nav-close" id="mobile-drawer-close" aria-label="Close Navigation Menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Our Services</a></li>
+      <li><a href="testimonials.html" class="mobile-nav-link">Testimonials</a></li>
+      <li>
+        <span class="mobile-nav-link" style="font-weight: 600; color: var(--text-primary);">Resources</span>
+        <ul class="mobile-resources-sublinks">
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="milestones-blog.html">Developmental Blog</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
+      <li style="margin-top: 1.5rem;"><a href="booking.html" class="btn-primary">Book Appointment</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <main>
+    <div class="page-container">
+      
+      <!-- Page Header -->
+      <div class="page-header">
+        <h2>Book an <span class="highlight-rose">Appointment</span></h2>
+        <p>Complete the step-by-step scheduler wizard below to secure a consulting slot.</p>
+      </div>
+
+      <!-- Booking Wizard Form card -->
+      <div class="booking-wizard-card glass-card" id="wizard-card-container">
+        
+        <!-- Progress Stepper nodes -->
+        <div class="booking-stepper-tracker">
+          <div class="stepper-progress-fill-line" id="booking-progress-fill"></div>
+          <div class="stepper-node active" data-step="1">1</div>
+          <div class="stepper-node" data-step="2">2</div>
+          <div class="stepper-node" data-step="3">3</div>
+          <div class="stepper-node" data-step="4">4</div>
+        </div>
+
+        <!-- Step 1 Panel: Consult Type -->
+        <div class="booking-panel-slide active" id="booking-step-1">
+          <h3 style="margin-bottom: 2rem; text-align: center;">Choose Appointment Type</h3>
+          <div class="consult-grid-cards">
+            <!-- Option 1 -->
+            <div class="consult-card-option glass-card active" id="type-offline">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 15h-2v-4H7v-2h3V7h2v5h3v2h-3v4z"/>
+              </svg>
+              <h3>In-Clinic Consultation</h3>
+              <p style="font-size: 0.9rem;">Visit our child-friendly Kondapur clinic for physical screenings, immediate care, or routine immunizations.</p>
+            </div>
+            <!-- Option 2 -->
+            <div class="consult-card-option glass-card" id="type-tele">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm-9 12l-4-4h8l-4 4z"/>
+              </svg>
+              <h3>Telehealth Video Consult</h3>
+              <p style="font-size: 0.9rem;">Schedule a secure remote video consultation from the comfort of your home to review non-urgent topics or dietary plans.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 Panel: Doctor Selection -->
+        <div class="booking-panel-slide" id="booking-step-2">
+          <h3 style="margin-bottom: 2rem; text-align: center;">Select Pediatrician</h3>
+          <div class="doctor-select-grid">
+            <!-- Doctor 1 -->
+            <div class="doctor-select-card glass-card active" id="doc-jyo">
+              <img src="photos/dr_jyothirmayi.jpg" alt="Dr. Jyothirmayi Kavipurapu" class="doc-avatar-img">
+              <div class="doc-card-details">
+                <p class="dept">Director / Primary</p>
+                <h3>Dr. K. Jyothirmayi</h3>
+                <p class="exp">MBBS, MD | 10+ Yrs Experience</p>
+              </div>
+            </div>
+            <!-- Doctor 2 -->
+            <div class="doctor-select-card glass-card" id="doc-x">
+              <div class="avatar-placeholder">DS</div>
+              <div class="doc-card-details">
+                <p class="dept">Consultant Pediatrician</p>
+                <h3>Dr. Rohan Sharma</h3>
+                <p class="exp">MBBS, DCH | 6+ Yrs Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 Panel: Date & Slots -->
+        <div class="booking-panel-slide" id="booking-step-3">
+          <h3 style="margin-bottom: 2rem; text-align: center;">Select Date & Available Slot</h3>
+          
+          <div class="wizard-date-scroll-rack" id="date-scroll-row">
+            <!-- Generated via JS -->
+          </div>
+
+          <h4 style="font-size: 1.05rem; margin-bottom: 1rem; font-weight: 700;">Available Timeslots</h4>
+          <div class="wizard-slots-grid-pane" id="slots-time-grid">
+            <!-- Generated via JS -->
+          </div>
+        </div>
+
+        <!-- Step 4 Panel: Checkout Paywall -->
+        <div class="booking-panel-slide" id="booking-step-4">
+          <h3 style="margin-bottom: 2.5rem; text-align: center;">Confirm Booking & Secure Checkout</h3>
+          
+          <div class="checkout-panel-split">
+            <!-- Left Invoice column -->
+            <div class="checkout-summary-column">
+              <h4 class="checkout-summary-heading">Appointment Summary</h4>
+              
+              <div class="checkout-summary-row">
+                <span style="color: var(--text-secondary);">Consultation Type</span>
+                <strong id="sum-type">In-Clinic Consultation</strong>
+              </div>
+              <div class="checkout-summary-row">
+                <span style="color: var(--text-secondary);">Pediatrician</span>
+                <strong id="sum-doc">Dr. K. Jyothirmayi</strong>
+              </div>
+              <div class="checkout-summary-row">
+                <span style="color: var(--text-secondary);">Scheduled Date</span>
+                <strong id="sum-date">Jun 8, 2026</strong>
+              </div>
+              <div class="checkout-summary-row">
+                <span style="color: var(--text-secondary);">Scheduled Time</span>
+                <strong id="sum-time">10:30 AM</strong>
+              </div>
+              <div class="checkout-summary-row">
+                <span style="color: var(--text-secondary);">Consultation Fee</span>
+                <span id="sum-fee">₹500.00</span>
+              </div>
+              
+              <div class="checkout-summary-row total-row">
+                <span>Total Due</span>
+                <span id="sum-total">₹500.00</span>
+              </div>
+            </div>
+
+            <!-- Right Payment form column with Flip Card graphic -->
+            <div class="payment-forms-panel">
+              
+              <!-- Gateway Selector -->
+              <div class="payment-gateway-radio-picker">
+                <label class="gateway-pill active" id="pay-upi-pill">
+                  <input type="radio" name="pay-method" value="upi" checked>
+                  <i class="fa-solid fa-mobile-screen"></i> UPI Pay
+                </label>
+                <label class="gateway-pill" id="pay-card-pill">
+                  <input type="radio" name="pay-method" value="card">
+                  <i class="fa-regular fa-credit-card"></i> Card Pay
+                </label>
+                <label class="gateway-pill" id="pay-counter-pill">
+                  <input type="radio" name="pay-method" value="counter">
+                  <i class="fa-solid fa-money-bill-wave"></i> Pay at Clinic
+                </label>
+              </div>
+
+              <!-- Interactive Card Visual Overlay (Initially Hidden, Toggles on Card Radio Selection) -->
+              <div class="payment-card-visual" id="payment-card-graphic" style="display: none;">
+                <div class="payment-card-inner">
+                  <!-- Front card face -->
+                  <div class="payment-card-front">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                      <div class="chip"></div>
+                      <i class="fa-brands fa-cc-visa" style="font-size: 1.8rem;"></i>
+                    </div>
+                    <div class="card-number-lbl" id="card-number-preview">•••• •••• •••• ••••</div>
+                    <div class="card-holder-row">
+                      <div>
+                        <span>Card Holder</span>
+                        <div id="card-holder-preview" style="font-weight: bold; font-size: 0.9rem; text-transform: uppercase;">YOUR NAME</div>
+                      </div>
+                      <div>
+                        <span>Expires</span>
+                        <div id="card-expiry-preview" style="font-weight: bold; font-size: 0.9rem;">MM/YY</div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Back card face -->
+                  <div class="payment-card-back">
+                    <div class="stripe"></div>
+                    <div style="padding: 0 1rem; text-align: right; width: 100%;">
+                      <span style="font-size: 0.65rem; text-transform: uppercase; color: rgba(255,255,255,0.7); display: block; margin-bottom: 4px;">CVV</span>
+                      <div class="cvv-stripe" id="card-cvv-preview">•••</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form: Credit Card Inputs -->
+              <div class="credit-card-form-inputs" id="cc-inputs-panel" style="display: none;">
+                <div class="form-field-group">
+                  <label for="cc-number">Card Number</label>
+                  <input type="text" id="cc-number" placeholder="4111 2222 3333 4444" maxlength="19">
+                </div>
+                <div class="form-field-group">
+                  <label for="cc-name">Cardholder Name</label>
+                  <input type="text" id="cc-name" placeholder="John Doe">
+                </div>
+                <div class="form-field-row">
+                  <div class="form-field-group">
+                    <label for="cc-expiry">Expiration Date</label>
+                    <input type="text" id="cc-expiry" placeholder="MM/YY" maxlength="5">
+                  </div>
+                  <div class="form-field-group">
+                    <label for="cc-cvv">Security Code (CVV)</label>
+                    <input type="password" id="cc-cvv" placeholder="123" maxlength="3">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form: UPI Input -->
+              <div class="credit-card-form-inputs" id="upi-inputs-panel">
+                <div class="form-field-group">
+                  <label for="upi-id">UPI ID / VPA</label>
+                  <input type="text" id="upi-id" placeholder="e.g. mobile@upi or name@okaxis">
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">A payment request notification will be sent to your GooglePay/PhonePe application to complete the secure checkout process.</p>
+              </div>
+
+              <!-- Form: Cash Counter Info -->
+              <div class="credit-card-form-inputs" id="counter-inputs-panel" style="display: none;">
+                <p style="font-size: 0.95rem; font-weight: 500;">No immediate online checkout is required.</p>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">You can finalize your ₹500.00 payment at the Cherish children's clinic cash desk using cash, cards, or scan-UPI QR during your visit.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 Panel: Booking Success screen -->
+        <div class="success-screen-card" id="booking-success-panel">
+          <svg class="success-check-mark-svg" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <h2>Appointment Scheduled!</h2>
+          <p id="booking-success-message">Congratulations! Your In-Clinic Consultation with Dr. K. Jyothirmayi is fully confirmed for Monday, Jun 8, 2026 at 10:30 AM. A receipt and instructions calendar slip have been messaged to your registered phone number.</p>
+          <a href="index.html" class="btn-primary" style="padding: 0.85rem 3rem;">Return Home</a>
+        </div>
+
+        <!-- Wizard Navigation buttons -->
+        <div class="booking-wizard-nav-row" id="wizard-nav-buttons-row">
+          <button class="btn-outline" id="booking-prev" style="visibility: hidden;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="btn-primary" id="booking-next">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top-columns">
+      <div class="footer-logo-brand">
+        <h2>
+          Cherish
+          <span class="clinic-sub">Children's Clinic</span>
+        </h2>
+        <p>Cherish Children’s Clinic, established on March 30, 2019, is a trusted pediatric clinic in Kondapur providing high-quality and compassionate care for children. Our goal is to support parents in raising healthy and happy children.</p>
+        <div class="social-icons" style="margin-top: 1rem;">
+          <a href="https://www.instagram.com/doc_mom_jyo/?hl=en" target="_blank" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919986777109" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation Links</h4>
+        <ul class="footer-links-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Clinic Services</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources & Tools</h4>
+        <ul class="footer-links-list">
+          <li><a href="bmi-calculator.html">Pediatric BMI Calculator</a></li>
+          <li><a href="milestones-blog.html">Milestones Checkpoints</a></li>
+          <li><a href="booking.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>&copy; 2026 Cherish Children's Clinic. All Rights Reserved.</p>
+      <p>Consultations by Dr. K Jyothirmayi Kavipurapu</p>
+    </div>
+  </footer>
+
+  <!-- Universal Script -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Resources - Cherish Children's Clinic</title>
+  <meta name="description" content="Access pediatric health tools and guides at Cherish Children's Clinic. Use our Pediatric BMI calculator and track developmental milestones up to 5 years.">
+  <meta name="keywords" content="pediatric BMI calculator, developmental milestones, child growth indicators, pediatric advice kondapur">
+  <meta name="author" content="Dr. K Jyothirmayi">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="photos/logo.jpg">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Background blobs -->
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="bg-blob bg-blob-3"></div>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/919986777109?text=Hello%20Cherish%20Children's%20Clinic,%20I'd%20like%20to%20inquire%20about%20booking%20an%20appointment." 
+     target="_blank" 
+     class="whatsapp-widget" 
+     aria-label="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Header Navigation -->
+  <header id="main-header">
+    <div class="logo-container">
+      <img src="photos/logo.jpg" alt="Cherish Clinic Logo" class="logo-img">
+      <h1>
+        Cherish
+        <span class="clinic-sub">Children's Clinic</span>
+      </h1>
+    </div>
+    
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Our Services</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      
+      <!-- Resources Dropdown -->
+      <div class="dropdown">
+        <a href="resources.html" class="nav-link active">Resources <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i></a>
+        <div class="dropdown-menu">
+          <a href="bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+          <a href="milestones-blog.html" class="dropdown-item">Developmental Blog</a>
+        </div>
+      </div>
+      
+      <a href="contact.html" class="nav-link">Contact Us</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/doc_mom_jyo/?hl=en" target="_blank" class="social-icon instagram" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919986777109" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <a href="booking.html" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Book Online</a>
+    </div>
+
+    <!-- Hamburger Menu Toggle (Mobile) -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-drawer">
+    <button class="mobile-nav-close" id="mobile-drawer-close" aria-label="Close Navigation Menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Our Services</a></li>
+      <li><a href="testimonials.html" class="mobile-nav-link">Testimonials</a></li>
+      <li>
+        <span class="mobile-nav-link" style="font-weight: 600; color: var(--text-primary);">Resources</span>
+        <ul class="mobile-resources-sublinks">
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="milestones-blog.html">Developmental Blog</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
+      <li style="margin-top: 1.5rem;"><a href="booking.html" class="btn-primary">Book Appointment</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <main>
+    <div class="page-container">
+      
+      <!-- Resources Index Container -->
+      <div id="resources-index-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h2>Parent & Caregiver <span class="highlight-rose">Resources</span></h2>
+          <p>Explore pediatric tools and clinical guidelines compiled by Dr. K Jyothirmayi.</p>
+        </div>
+
+        <!-- Section 1: Health Tools Index -->
+        <section style="margin-bottom: 4rem;">
+          <div style="margin-bottom: 2rem;">
+            <span class="category-pre">Pediatric Tools</span>
+            <h3 style="font-size: 1.8rem; margin-top: 0.25rem;">Interactive Health Calculators</h3>
+            <p style="color: var(--text-secondary); max-width: 650px;">Use our clinical tools to track measurements, check growth statistics, and evaluate physical growth indicators.</p>
+          </div>
+
+          <div class="resource-index-grid">
+            <!-- Tool 1 Card -->
+            <a href="bmi-calculator.html" class="resource-card-link" id="idx-link-bmi">
+              <div class="resource-index-card">
+                <div class="resource-icon-badge">
+                  <i class="fa-solid fa-calculator"></i>
+                </div>
+                <h4>Pediatric BMI Calculator</h4>
+                <p>Calculate your child's Body Mass Index (BMI) and review growth percentiles against Indian Academy of Pediatrics (IAP) references.</p>
+                <div class="resource-action-lbl">
+                  Open Calculator <i class="fa-solid fa-arrow-right"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 2: Medical Blogs Index -->
+        <section style="margin-bottom: 5rem;">
+          <div style="margin-bottom: 2rem;">
+            <span class="category-pre">Pediatric Blog</span>
+            <h3 style="font-size: 1.8rem; margin-top: 0.25rem;">Expert Clinical Articles</h3>
+            <p style="color: var(--text-secondary); max-width: 650px;">Read medical columns written by Dr. K Jyothirmayi Kavipurapu on childhood wellness, immunity schedules, and milestone tracking.</p>
+          </div>
+
+          <div class="resource-index-grid">
+            <!-- Blog 1 Card: Milestones -->
+            <a href="milestones-blog.html" class="resource-card-link" id="idx-link-milestones">
+              <div class="resource-index-card">
+                <div class="resource-icon-badge">
+                  <i class="fa-solid fa-newspaper"></i>
+                </div>
+                <h4>Childhood Developmental Milestones</h4>
+                <p>A comprehensive parent's guide to milestones for children from ages 1 to 5, featuring social, speech, and physical warning flags.</p>
+                <div class="resource-action-lbl">
+                  Read Article <i class="fa-solid fa-arrow-right"></i>
+                </div>
+              </div>
+            </a>
+
+            <!-- Blog 2 Card: Immunizations -->
+            <a href="vaccines-blog.html" class="resource-card-link" id="idx-link-vaccines">
+              <div class="resource-index-card">
+                <div class="resource-icon-badge">
+                  <i class="fa-solid fa-syringe"></i>
+                </div>
+                <h4>Immunization Schedules Guide</h4>
+                <p>Learn about critical pediatric vaccine timings, IAP guidelines, and practical ways to manage mild post-vaccine fever symptoms.</p>
+                <div class="resource-action-lbl">
+                  Read Article <i class="fa-solid fa-arrow-right"></i>
+                </div>
+              </div>
+            </a>
+
+            <!-- Blog 3 Card: Nutrition -->
+            <a href="nutrition-blog.html" class="resource-card-link" id="idx-link-nutrition">
+              <div class="resource-index-card">
+                <div class="resource-icon-badge">
+                  <i class="fa-solid fa-apple-whole"></i>
+                </div>
+                <h4>Childhood Nutrition & Picky Eaters</h4>
+                <p>Nutritional guidelines and psychologist-approved tips from Dr. Jyo on balancing diets and managing selective eating habits.</p>
+                <div class="resource-action-lbl">
+                  Read Article <i class="fa-solid fa-arrow-right"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top-columns">
+      <div class="footer-logo-brand">
+        <h2>
+          Cherish
+          <span class="clinic-sub">Children's Clinic</span>
+        </h2>
+        <p>Cherish Children’s Clinic, established on March 30, 2019, is a trusted pediatric clinic in Kondapur providing high-quality and compassionate care for children. Our goal is to support parents in raising healthy and happy children.</p>
+        <div class="social-icons" style="margin-top: 1rem;">
+          <a href="https://www.instagram.com/doc_mom_jyo/?hl=en" target="_blank" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919986777109" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation Links</h4>
+        <ul class="footer-links-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Clinic Services</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources & Tools</h4>
+        <ul class="footer-links-list">
+          <li><a href="bmi-calculator.html">Pediatric BMI Calculator</a></li>
+          <li><a href="milestones-blog.html">Milestones Checkpoints</a></li>
+          <li><a href="booking.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>&copy; 2026 Cherish Children's Clinic. All Rights Reserved.</p>
+      <p>Consultations by Dr. K Jyothirmayi Kavipurapu</p>
+    </div>
+  </footer>
+
+  <!-- Universal Script -->
+  <script src="script.js"></script>
+</body>
+</html>

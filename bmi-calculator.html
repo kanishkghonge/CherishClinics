@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pediatric BMI Calculator - Cherish Children's Clinic</title>
+  <meta name="description" content="Use our interactive pediatric BMI growth calculator to check your child's developmental weight ranges based on IAP and WHO guidelines.">
+  <meta name="keywords" content="pediatric bmi calculator, child weight checker, kids growth percentiles, growth chart tracker hyderabad">
+  <meta name="author" content="Dr. K Jyothirmayi">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="photos/logo.jpg">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Background blobs -->
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="bg-blob bg-blob-3"></div>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/919986777109?text=Hello%20Cherish%20Children's%20Clinic,%20I'd%20like%20to%20inquire%20about%20booking%20an%20appointment." 
+     target="_blank" 
+     class="whatsapp-widget" 
+     aria-label="Chat with us on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Header Navigation -->
+  <header id="main-header">
+    <div class="logo-container">
+      <img src="photos/logo.jpg" alt="Cherish Clinic Logo" class="logo-img">
+      <h1>
+        Cherish
+        <span class="clinic-sub">Children's Clinic</span>
+      </h1>
+    </div>
+    
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Our Services</a>
+      <a href="testimonials.html" class="nav-link">Testimonials</a>
+      
+      <!-- Resources Dropdown -->
+      <div class="dropdown">
+        <a href="resources.html" class="nav-link active">Resources <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i></a>
+        <div class="dropdown-menu">
+          <a href="bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+          <a href="milestones-blog.html" class="dropdown-item">Developmental Blog</a>
+        </div>
+      </div>
+      
+      <a href="contact.html" class="nav-link">Contact Us</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/doc_mom_jyo/?hl=en" target="_blank" class="social-icon instagram" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/919986777109" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <a href="booking.html" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Book Online</a>
+    </div>
+
+    <!-- Hamburger Menu Toggle (Mobile) -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-drawer">
+    <button class="mobile-nav-close" id="mobile-drawer-close" aria-label="Close Navigation Menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Our Services</a></li>
+      <li><a href="testimonials.html" class="mobile-nav-link">Testimonials</a></li>
+      <li>
+        <span class="mobile-nav-link" style="font-weight: 600; color: var(--text-primary);">Resources</span>
+        <ul class="mobile-resources-sublinks">
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="milestones-blog.html">Developmental Blog</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
+      <li style="margin-top: 1.5rem;"><a href="booking.html" class="btn-primary">Book Appointment</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <main>
+    <div class="page-container">
+      
+      <!-- Section: Tools (BMI Calculator) -->
+      <section id="tools" class="resources-section" style="display: block; margin-top: 2rem;">
+        <!-- Back Link -->
+        <a href="resources.html" class="back-to-index-btn"><i class="fa-solid fa-arrow-left"></i> Back to Resources Index</a>
+
+        <div class="section-title-wrapper" style="text-align: center; margin-bottom: 3rem;">
+          <span class="category-pre">Interactive Health Tools</span>
+          <h3>Pediatric BMI Calculator</h3>
+          <p style="max-width: 600px; margin: 0.5rem auto 0 auto;">Select your child's gender and adjust age, height, and weight to instantly view custom BMI status categories based on medical standards.</p>
+        </div>
+
+        <div class="bmi-calculator-split">
+          <!-- Left side controls -->
+          <div class="bmi-control-box glass-card">
+            <!-- Gender Selection -->
+            <div class="gender-select-pill">
+              <button class="gender-pill-btn active" id="gender-boy-btn" type="button">Boy</button>
+              <button class="gender-pill-btn" id="gender-girl-btn" type="button">Girl</button>
+            </div>
+
+            <!-- Age Input -->
+            <div class="range-slider-group">
+              <div class="slider-label-row">
+                <span class="label-title">Age (Years)</span>
+                <span class="label-value-display"><span id="val-age">5</span> yrs</span>
+              </div>
+              <input type="range" id="slider-age" min="2" max="20" step="0.5" value="5">
+            </div>
+
+            <!-- Height Input -->
+            <div class="range-slider-group">
+              <div class="slider-label-row">
+                <span class="label-title">Height (cm)</span>
+                <span class="label-value-display"><span id="val-height">110</span> cm</span>
+              </div>
+              <input type="range" id="slider-height" min="50" max="200" step="1" value="110">
+            </div>
+
+            <!-- Weight Input -->
+            <div class="range-slider-group">
+              <div class="slider-label-row">
+                <span class="label-title">Weight (kg)</span>
+                <span class="label-value-display"><span id="val-weight">18</span> kg</span>
+              </div>
+              <input type="range" id="slider-weight" min="5" max="120" step="0.5" value="18">
+            </div>
+          </div>
+
+          <!-- Right side output -->
+          <div class="bmi-output-display-card glass-card" style="position: relative;">
+            
+            <!-- Fake Loader Overlay -->
+            <div class="bmi-loader-overlay" id="bmi-loader">
+              <div class="bmi-loader-bar-bg">
+                <div class="bmi-loader-bar-fill" id="bmi-loader-fill"></div>
+              </div>
+              <span>Computing Pediatric Growth Metrics...</span>
+            </div>
+
+            <!-- Result Content Panel -->
+            <div class="bmi-result-content" id="bmi-result-content">
+              <!-- SVG circular gauge -->
+              <div class="bmi-gauge-metric-box">
+                <svg class="bmi-gauge-metric-svg" viewBox="0 0 160 160">
+                  <circle class="bg" cx="80" cy="80" r="70"></circle>
+                  <circle class="fill" id="bmi-gauge-fill" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div class="bmi-value-overlay">
+                  <h3 id="res-bmi-val">14.9</h3>
+                  <span>BMI Value</span>
+                </div>
+              </div>
+
+              <!-- Category Indicator badge -->
+              <div class="bmi-status-badge healthy" id="res-bmi-status">Healthy Weight</div>
+
+              <!-- Interpretations content -->
+              <h4 id="res-bmi-title" style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-primary);">Optimal Growth</h4>
+              <p id="res-bmi-desc" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);">Your child's weight is in the healthy percentile. Continue supporting growth with diverse nutrition and daily activities.</p>
+
+              <!-- Warning Nudge to book appointment -->
+              <div class="bmi-action-alert-card" id="bmi-nudge-card">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <i class="fa-solid fa-circle-exclamation" style="color: var(--terracotta-rose); font-size: 1.25rem; margin-top: 2px;"></i>
+                  <div>
+                    <h5 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">Pediatric Intervention Advised</h5>
+                    <p style="font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); margin: 0;">This calculated value borders outside standard growth curves for their demographic. We advise scheduling a pediatric review to map their long-term health trajectory.</p>
+                  </div>
+                </div>
+                <a href="booking.html" class="btn-primary" style="align-self: flex-start; padding: 0.6rem 1.5rem; font-size: 0.85rem; margin-top: 0.5rem;">Book Clinic Growth Review</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top-columns">
+      <div class="footer-logo-brand">
+        <h2>
+          Cherish
+          <span class="clinic-sub">Children's Clinic</span>
+        </h2>
+        <p>Cherish Children’s Clinic, established on March 30, 2019, is a trusted pediatric clinic in Kondapur providing high-quality and compassionate care for children. Our goal is to support parents in raising healthy and happy children.</p>
+        <div class="social-icons" style="margin-top: 1rem;">
+          <a href="https://www.instagram.com/doc_mom_jyo/?hl=en" target="_blank" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919986777109" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation Links</h4>
+        <ul class="footer-links-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Clinic Services</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources & Tools</h4>
+        <ul class="footer-links-list">
+          <li><a href="bmi-calculator.html">Pediatric BMI Calculator</a></li>
+          <li><a href="milestones-blog.html">Milestones Checkpoints</a></li>
+          <li><a href="booking.html">Book Appointment</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>&copy; 2026 Cherish Children's Clinic. All Rights Reserved.</p>
+      <p>Consultations by Dr. K Jyothirmayi Kavipurapu</p>
+    </div>
+  </footer>
+
+  <!-- Universal Script -->
+  <script src="script.js"></script>
+</body>
+</html>
