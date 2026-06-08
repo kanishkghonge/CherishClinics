@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (track && prevBtn && nextBtn && dotsContainer) {
     const slides = Array.from(track.children);
     let currentSlideIndex = 0;
+    let autoSlideTimer = null;
 
     // Build dots dynamically
     slides.forEach((_, index) => {
@@ -86,19 +87,36 @@ document.addEventListener('DOMContentLoaded', () => {
       currentSlideIndex = targetIndex;
     };
 
+    // Auto-slide every 5 seconds
+    const startAutoSlide = () => {
+      autoSlideTimer = setInterval(() => {
+        updateSlider(currentSlideIndex + 1);
+      }, 5000);
+    };
+
+    const resetAutoSlide = () => {
+      clearInterval(autoSlideTimer);
+      startAutoSlide();
+    };
+
     nextBtn.addEventListener('click', () => {
       updateSlider(currentSlideIndex + 1);
+      resetAutoSlide();
     });
 
     prevBtn.addEventListener('click', () => {
       updateSlider(currentSlideIndex - 1);
+      resetAutoSlide();
     });
 
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         updateSlider(index);
+        resetAutoSlide();
       });
     });
+
+    startAutoSlide();
   }
 
   // ==========================================
