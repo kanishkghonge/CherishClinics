@@ -46,10 +46,11 @@
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
       <a href="services.html" class="nav-link">Our Services</a>
+      <a href="nutrition.html" class="nav-link">Nutrition</a>
       <a href="testimonials.html" class="nav-link">Testimonials</a>
       
       <!-- Resources Link -->
-      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="resources.html" class="nav-link active">Resources</a>
       
       <a href="contact.html" class="nav-link">Contact Us</a>
     </nav>
@@ -79,6 +80,7 @@
       <li><a href="index.html" class="mobile-nav-link">Home</a></li>
       <li><a href="about.html" class="mobile-nav-link">About</a></li>
       <li><a href="services.html" class="mobile-nav-link">Our Services</a></li>
+      <li><a href="nutrition.html" class="mobile-nav-link">Nutrition</a></li>
       <li><a href="testimonials.html" class="mobile-nav-link">Testimonials</a></li>
       <li><a href="resources.html" class="mobile-nav-link">Resources</a></li>
       <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
@@ -92,89 +94,118 @@
       
       <!-- Resources Index Container -->
       <div id="resources-index-container">
-        <!-- Page Header -->
-        <div class="page-header">
-          <h2>Parent & Caregiver <span class="highlight-rose">Resources</span></h2>
-          <p>Explore pediatric tools and clinical guidelines compiled by Dr. K Jyothirmayi.</p>
+        <!-- Fancy Hero Split Header -->
+        <div class="hero-split" style="padding: 1rem 0 4rem 0; align-items: stretch;">
+          <div class="hero-text" style="display: flex; flex-direction: column; justify-content: center;">
+            <span class="hero-tag">Cherish Knowledge Hub</span>
+            <h2 style="font-size: 3rem; font-family: var(--font-heading); line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -1px;">
+              Empowering Parents with <span class="highlight-rose">Evidence-Based</span> Guidelines
+            </h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 2rem; max-width: 580px;">
+              Access professional pediatric tools, growth calculators, and comprehensive clinical guides verified by Dr. Jyothirmayi Kavipurapu to support your parenting journey.
+            </p>
+          </div>
+          
+          <!-- Featured Resource Spotlight Card -->
+          <div class="glass-card" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(198, 123, 115, 0.2); box-shadow: var(--glass-shadow-hover); position: relative; overflow: hidden; border-radius: 32px;">
+            <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background-color: rgba(198,123,115,0.06); border-radius: 50%; filter: blur(30px);"></div>
+            <div>
+              <span class="hero-tag" style="background-color: var(--bg-rose-light); color: var(--terracotta-rose); font-size: 0.75rem; margin-bottom: 1.25rem;">Spotlight Tool</span>
+              <h3 style="font-size: 1.6rem; margin-bottom: 0.75rem; font-family: var(--font-heading);">Pediatric BMI Calculator</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1.5rem;">
+                Evaluate your child's developmental weight curves and height metrics instantly using our custom calculator configured to IAP pediatric scales.
+              </p>
+            </div>
+            <a href="bmi-calculator.html" class="btn-secondary" style="align-self: flex-start; padding: 0.75rem 1.8rem; font-size: 0.9rem; border-radius: 30px; gap: 0.5rem;">
+              Launch Calculator <i class="fa-solid fa-calculator"></i>
+            </a>
+          </div>
         </div>
 
-        <!-- Section 1: Health Tools Index -->
-        <section style="margin-bottom: 4rem;">
-          <div style="margin-bottom: 2rem;">
-            <span class="category-pre">Pediatric Tools</span>
-            <h3 style="font-size: 1.8rem; margin-top: 0.25rem;">Interactive Health Calculators</h3>
-            <p style="color: var(--text-secondary); max-width: 650px;">Use our clinical tools to track measurements, check growth statistics, and evaluate physical growth indicators.</p>
-          </div>
+        <!-- Interactive Search Bar -->
+        <div class="search-container-wrap" style="max-width: 600px; margin: 0 auto 2.5rem auto; position: relative;">
+          <i class="fa-solid fa-magnifying-glass search-icon" style="position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); opacity: 0.6; font-size: 1.1rem;"></i>
+          <input type="text" id="resource-search-input" placeholder="Search by tool, topic, or article keyword..." 
+            style="width: 100%; padding: 1.1rem 1.5rem 1.1rem 3.2rem; border-radius: 50px; border: 1px solid rgba(62, 92, 74, 0.15); background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-family: var(--font-body); font-size: 1rem; color: var(--text-primary); transition: all 0.3s ease; box-shadow: var(--shadow-sm);">
+        </div>
 
-          <div class="resource-index-grid">
-            <!-- Tool 1 Card -->
-            <a href="bmi-calculator.html" class="resource-card-link" id="idx-link-bmi">
-              <div class="resource-index-card">
-                <div class="resource-icon-badge">
+        <!-- Filter Navigation Dock -->
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem;">
+          <button class="age-dock-btn active" style="padding: 0.6rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 0.9rem;" id="filter-btn-all" onclick="window.filterResources('all')">All Resources</button>
+          <button class="age-dock-btn" style="padding: 0.6rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 0.9rem;" id="filter-btn-tools" onclick="window.filterResources('tools')">Calculators & Tools</button>
+          <button class="age-dock-btn" style="padding: 0.6rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 0.9rem;" id="filter-btn-blogs" onclick="window.filterResources('blogs')">Clinical Articles</button>
+        </div>
+
+        <!-- Resources Masonry Grid -->
+        <div class="resource-index-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+          <!-- Item 1: BMI Calculator -->
+          <a href="bmi-calculator.html" class="resource-card-link resource-item-type" data-type="tools" id="idx-link-bmi">
+            <div class="resource-index-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div class="resource-icon-badge" style="margin-bottom: 0;">
                   <i class="fa-solid fa-calculator"></i>
                 </div>
-                <h4>Pediatric BMI Calculator</h4>
-                <p>Calculate your child's Body Mass Index (BMI) and review growth percentiles against Indian Academy of Pediatrics (IAP) references.</p>
-                <div class="resource-action-lbl">
-                  Open Calculator <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <span class="resource-badge-pill badge-sage">Interactive Tool</span>
               </div>
-            </a>
-          </div>
-        </section>
+              <h4>Pediatric BMI Calculator</h4>
+              <p>Calculate your child's Body Mass Index (BMI) and review growth percentiles against Indian Academy of Pediatrics (IAP) references.</p>
+              <div class="resource-action-lbl">
+                Open Calculator <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
 
-        <!-- Section 2: Medical Blogs Index -->
-        <section style="margin-bottom: 5rem;">
-          <div style="margin-bottom: 2rem;">
-            <span class="category-pre">Pediatric Blog</span>
-            <h3 style="font-size: 1.8rem; margin-top: 0.25rem;">Expert Clinical Articles</h3>
-            <p style="color: var(--text-secondary); max-width: 650px;">Read medical columns written by Dr. K Jyothirmayi Kavipurapu on childhood wellness, immunity schedules, and milestone tracking.</p>
-          </div>
-
-          <div class="resource-index-grid">
-            <!-- Blog 1 Card: Milestones -->
-            <a href="milestones-blog.html" class="resource-card-link" id="idx-link-milestones">
-              <div class="resource-index-card">
-                <div class="resource-icon-badge">
+          <!-- Item 2: Milestones -->
+          <a href="milestones-blog.html" class="resource-card-link resource-item-type" data-type="blogs" id="idx-link-milestones">
+            <div class="resource-index-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div class="resource-icon-badge" style="margin-bottom: 0;">
                   <i class="fa-solid fa-newspaper"></i>
                 </div>
-                <h4>Childhood Developmental Milestones</h4>
-                <p>A comprehensive parent's guide to milestones for children from ages 1 to 5, featuring social, speech, and physical warning flags.</p>
-                <div class="resource-action-lbl">
-                  Read Article <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <span class="resource-badge-pill badge-rose">Clinical Guide</span>
               </div>
-            </a>
+              <h4>Childhood Developmental Milestones</h4>
+              <p>A comprehensive parent's guide to milestones for children from ages 1 to 5, featuring social, speech, and physical warning flags.</p>
+              <div class="resource-action-lbl">
+                Read Article <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
 
-            <!-- Blog 2 Card: Immunizations -->
-            <a href="vaccines-blog.html" class="resource-card-link" id="idx-link-vaccines">
-              <div class="resource-index-card">
-                <div class="resource-icon-badge">
+          <!-- Item 3: Immunizations -->
+          <a href="vaccines-blog.html" class="resource-card-link resource-item-type" data-type="blogs" id="idx-link-vaccines">
+            <div class="resource-index-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div class="resource-icon-badge" style="margin-bottom: 0;">
                   <i class="fa-solid fa-syringe"></i>
                 </div>
-                <h4>Immunization Schedules Guide</h4>
-                <p>Learn about critical pediatric vaccine timings, IAP guidelines, and practical ways to manage mild post-vaccine fever symptoms.</p>
-                <div class="resource-action-lbl">
-                  Read Article <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <span class="resource-badge-pill badge-sage">Immunization</span>
               </div>
-            </a>
+              <h4>Immunization Schedules Guide</h4>
+              <p>Learn about critical pediatric vaccine timings, IAP guidelines, and practical ways to manage mild post-vaccine fever symptoms.</p>
+              <div class="resource-action-lbl">
+                Read Article <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
 
-            <!-- Blog 3 Card: Nutrition -->
-            <a href="nutrition-blog.html" class="resource-card-link" id="idx-link-nutrition">
-              <div class="resource-index-card">
-                <div class="resource-icon-badge">
+          <!-- Item 4: Nutrition -->
+          <a href="nutrition-blog.html" class="resource-card-link resource-item-type" data-type="blogs" id="idx-link-nutrition">
+            <div class="resource-index-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div class="resource-icon-badge" style="margin-bottom: 0;">
                   <i class="fa-solid fa-apple-whole"></i>
                 </div>
-                <h4>Childhood Nutrition & Picky Eaters</h4>
-                <p>Nutritional guidelines and psychologist-approved tips from Dr. Jyo on balancing diets and managing selective eating habits.</p>
-                <div class="resource-action-lbl">
-                  Read Article <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <span class="resource-badge-pill badge-rose">Nutrition Guide</span>
               </div>
-            </a>
-          </div>
-        </section>
+              <h4>Childhood Nutrition & Picky Eaters</h4>
+              <p>Nutritional guidelines and psychologist-approved tips from Dr. Jyo on balancing diets and managing selective eating habits.</p>
+              <div class="resource-action-lbl">
+                Read Article <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
 
     </div>
@@ -201,6 +232,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="services.html">Clinic Services</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
           <li><a href="testimonials.html">Testimonials</a></li>
         </ul>
       </div>

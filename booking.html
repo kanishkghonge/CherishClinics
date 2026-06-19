@@ -19,6 +19,33 @@
 </head>
 <body>
 
+  <!-- Timezone & Country Selector Popup Modal -->
+  <div id="timezone-modal" class="timezone-modal-overlay open">
+    <div class="timezone-modal-card glass-card">
+      <div class="timezone-modal-header">
+        <i class="fa-solid fa-earth-americas modal-icon"></i>
+        <h3>Select Your Region</h3>
+        <p>Timings shown here default to Indian Standard Time (IST). If you are visiting from outside India, please select your country to adjust session times accordingly.</p>
+      </div>
+      <div class="timezone-modal-body">
+        <div class="form-field-group" style="text-align: left; margin-bottom: 1rem;">
+          <label for="country-selector" style="font-weight: 600; display: block; margin-bottom: 0.5rem; color: var(--text-primary);">Select Country</label>
+          <select id="country-selector" class="modal-dropdown-select">
+            <option value="in" selected>India (IST)</option>
+            <option value="us">United States (EST)</option>
+            <option value="uk">United Kingdom (GMT)</option>
+            <option value="au">Australia (AEST)</option>
+            <option value="nz">New Zealand (NZST)</option>
+            <option value="other">Other Region (UTC)</option>
+          </select>
+        </div>
+      </div>
+      <div class="timezone-modal-footer">
+        <button id="timezone-modal-confirm" class="btn-primary">Confirm Settings <i class="fa-solid fa-circle-check"></i></button>
+      </div>
+    </div>
+  </div>
+
   <!-- Background blobs -->
   <div class="bg-blob bg-blob-1"></div>
   <div class="bg-blob bg-blob-2"></div>
@@ -46,6 +73,7 @@
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
       <a href="services.html" class="nav-link">Our Services</a>
+      <a href="nutrition.html" class="nav-link">Nutrition</a>
       <a href="testimonials.html" class="nav-link">Testimonials</a>
       
       <!-- Resources Link -->
@@ -79,6 +107,7 @@
       <li><a href="index.html" class="mobile-nav-link">Home</a></li>
       <li><a href="about.html" class="mobile-nav-link">About</a></li>
       <li><a href="services.html" class="mobile-nav-link">Our Services</a></li>
+      <li><a href="nutrition.html" class="mobile-nav-link">Nutrition</a></li>
       <li><a href="testimonials.html" class="mobile-nav-link">Testimonials</a></li>
       <li><a href="resources.html" class="mobile-nav-link">Resources</a></li>
       <li><a href="contact.html" class="mobile-nav-link">Contact Us</a></li>
@@ -128,12 +157,20 @@
               <h3>Telehealth Video Consult</h3>
               <p style="font-size: 0.9rem;">Schedule a secure remote video consultation from the comfort of your home to review non-urgent topics or dietary plans.</p>
             </div>
+            <!-- Option 3 -->
+            <div class="consult-card-option glass-card" id="type-nutrition">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.04 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9 0-4.97-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+              </svg>
+              <h3>Nutritionist Teleconsult</h3>
+              <p style="font-size: 0.9rem;">Specialized virtual dietary planning, picky eater guidance, and child growth reviews with our Pediatric Nutritionist.</p>
+            </div>
           </div>
         </div>
 
         <!-- Step 2 Panel: Doctor Selection -->
         <div class="booking-panel-slide" id="booking-step-2">
-          <h3 style="margin-bottom: 2rem; text-align: center;">Select Pediatrician</h3>
+          <h3 id="step-2-heading" style="margin-bottom: 2rem; text-align: center;">Select Pediatrician</h3>
           <div class="doctor-select-grid">
             <!-- Doctor 1 -->
             <div class="doctor-select-card glass-card active" id="doc-jyo">
@@ -145,12 +182,21 @@
               </div>
             </div>
             <!-- Doctor 2 -->
-            <div class="doctor-select-card glass-card" id="doc-x">
-              <div class="avatar-placeholder">DS</div>
+            <div class="doctor-select-card glass-card" id="doc-kalyan">
+              <div class="avatar-placeholder">KB</div>
               <div class="doc-card-details">
-                <p class="dept">Consultant Pediatrician</p>
-                <h3>Dr. Rohan Sharma</h3>
-                <p class="exp">MBBS, DCH | 6+ Yrs Experience</p>
+                <p class="dept">Associate Professor / Consultant</p>
+                <h3>Dr. Kalyan C. Bathineni</h3>
+                <p class="exp">MBBS, MD | 10 Yrs Experience</p>
+              </div>
+            </div>
+            <!-- Doctor 4 (Nutritionist, only visible when Nutritionist Teleconsult selected) -->
+            <div class="doctor-select-card glass-card" id="doc-nutritionist" style="display: none;">
+              <div class="avatar-placeholder" style="background-color: var(--terracotta-rose); color: #fff;">AS</div>
+              <div class="doc-card-details">
+                <p class="dept">Clinical Pediatric Dietitian</p>
+                <h3>Ms. Ananya Sen</h3>
+                <p class="exp">MSc Food & Nutrition | 8 Yrs Experience</p>
               </div>
             </div>
           </div>
@@ -219,10 +265,6 @@
                   <input type="radio" name="pay-method" value="card">
                   <i class="fa-regular fa-credit-card"></i> Card Pay
                 </label>
-                <label class="gateway-pill" id="pay-counter-pill">
-                  <input type="radio" name="pay-method" value="counter">
-                  <i class="fa-solid fa-money-bill-wave"></i> Pay at Clinic
-                </label>
               </div>
 
               <!-- Interactive Card Visual Overlay (Initially Hidden, Toggles on Card Radio Selection) -->
@@ -288,11 +330,7 @@
                 <p style="font-size: 0.8rem; color: var(--text-secondary);">A payment request notification will be sent to your GooglePay/PhonePe application to complete the secure checkout process.</p>
               </div>
 
-              <!-- Form: Cash Counter Info -->
-              <div class="credit-card-form-inputs" id="counter-inputs-panel" style="display: none;">
-                <p style="font-size: 0.95rem; font-weight: 500;">No immediate online checkout is required.</p>
-                <p style="font-size: 0.85rem; color: var(--text-secondary);">You can finalize your ₹500.00 payment at the Cherish children's clinic cash desk using cash, cards, or scan-UPI QR during your visit.</p>
-              </div>
+
 
             </div>
           </div>
@@ -340,6 +378,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="services.html">Clinic Services</a></li>
+          <li><a href="nutrition.html">Nutrition</a></li>
           <li><a href="testimonials.html">Testimonials</a></li>
         </ul>
       </div>

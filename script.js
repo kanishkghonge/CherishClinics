@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 7. Booking Wizard Steps & Credit Card Flip
+  // 7. Booking Wizard Steps, Timezone conversion, and Nutritionist Path
   // ==========================================
   let activeStep = 1;
   const bookingStepperMax = 4;
@@ -352,7 +352,67 @@ document.addEventListener('DOMContentLoaded', () => {
   let doctorName = 'Dr. K. Jyothirmayi';
   let appointmentDate = '';
   let appointmentTime = '';
-  let consultationPrice = 500;
+  
+  // Region/Currency state defaults
+  let selectedCountry = 'in';
+  let currencySymbol = '₹';
+  let currencyCode = 'INR';
+
+  // Base pricing in INR
+  const basePrices = {
+    'Dr. K. Jyothirmayi': 500,
+    'Dr. Kalyan C. Bathineni': 500,
+    'Ms. Ananya Sen': 500
+  };
+
+  // Conversions for major countries (pricing maps)
+  const countryConfig = {
+    'in': { symbol: '₹', code: 'INR', tzLabel: 'IST', Jyo: 500, Kalyan: 500, Nutritionist: 500 },
+    'us': { symbol: '$', code: 'USD', tzLabel: 'EST', Jyo: 25, Kalyan: 25, Nutritionist: 25 },
+    'uk': { symbol: '£', code: 'GBP', tzLabel: 'GMT', Jyo: 20, Kalyan: 20, Nutritionist: 20 },
+    'au': { symbol: 'A$', code: 'AUD', tzLabel: 'AEST', Jyo: 35, Kalyan: 35, Nutritionist: 35 },
+    'nz': { symbol: 'NZ$', code: 'NZD', tzLabel: 'NZST', Jyo: 40, Kalyan: 40, Nutritionist: 40 },
+    'other': { symbol: '$', code: 'USD', tzLabel: 'UTC', Jyo: 25, Kalyan: 25, Nutritionist: 25 }
+  };
+
+  const getTimezoneTime = (istTime, country) => {
+    // Mapping of slot conversions
+    const conversionMap = {
+      'in': {
+        "10:30 AM": "10:30 AM IST", "11:00 AM": "11:00 AM IST", "11:30 AM": "11:30 AM IST", "12:00 PM": "12:00 PM IST",
+        "5:30 PM": "5:30 PM IST", "6:00 PM": "6:00 PM IST", "6:30 PM": "6:30 PM IST", "7:00 PM": "7:00 PM IST"
+      },
+      'us': {
+        "10:30 AM": "12:00 AM EST", "11:00 AM": "12:30 AM EST", "11:30 AM": "1:00 AM EST", "12:00 PM": "1:30 AM EST",
+        "5:30 PM": "7:00 AM EST", "6:00 PM": "7:30 AM EST", "6:30 PM": "8:00 AM EST", "7:00 PM": "8:30 AM EST"
+      },
+      'uk': {
+        "10:30 AM": "6:00 AM GMT", "11:00 AM": "6:30 AM GMT", "11:30 AM": "7:00 AM GMT", "12:00 PM": "7:30 AM GMT",
+        "5:30 PM": "1:00 PM GMT", "6:00 PM": "1:30 PM GMT", "6:30 PM": "2:00 PM GMT", "7:00 PM": "2:30 PM GMT"
+      },
+      'au': {
+        "10:30 AM": "3:00 PM AEST", "11:00 AM": "3:30 PM AEST", "11:30 AM": "4:00 PM AEST", "12:00 PM": "4:30 PM AEST",
+        "5:30 PM": "10:00 PM AEST", "6:00 PM": "10:30 PM AEST", "6:30 PM": "11:00 PM AEST", "7:00 PM": "11:30 PM AEST"
+      },
+      'nz': {
+        "10:30 AM": "5:00 PM NZST", "11:00 AM": "5:30 PM NZST", "11:30 AM": "6:00 PM NZST", "12:00 PM": "6:30 PM NZST",
+        "5:30 PM": "12:00 AM NZST", "6:00 PM": "12:30 AM NZST", "6:30 PM": "1:00 AM NZST", "7:00 PM": "1:30 AM NZST"
+      },
+      'other': {
+        "10:30 AM": "5:00 AM UTC", "11:00 AM": "5:30 AM UTC", "11:30 AM": "6:00 AM UTC", "12:00 PM": "6:30 AM UTC",
+        "5:30 PM": "12:00 PM UTC", "6:00 PM": "12:30 PM UTC", "6:30 PM": "1:00 PM UTC", "7:00 PM": "1:30 PM UTC"
+      }
+    };
+    return conversionMap[country][istTime] || `${istTime} (IST)`;
+  };
+
+  const getPriceForSelectedDoctor = () => {
+    const config = countryConfig[selectedCountry];
+    if (doctorName === 'Dr. K. Jyothirmayi') return config.Jyo;
+    if (doctorName === 'Dr. Kalyan C. Bathineni') return config.Kalyan;
+    if (doctorName === 'Ms. Ananya Sen') return config.Nutritionist;
+    return config.Jyo;
+  };
 
   // DOM Elements
   const bookingPrev = document.getElementById('booking-prev');
@@ -362,40 +422,99 @@ document.addEventListener('DOMContentLoaded', () => {
   // step cards selection
   const offlineCard = document.getElementById('type-offline');
   const teleCard = document.getElementById('type-tele');
+  const nutritionCard = document.getElementById('type-nutrition');
+  
   const docJyo = document.getElementById('doc-jyo');
-  const docX = document.getElementById('doc-x');
+  const docKalyan = document.getElementById('doc-kalyan');
+  const docNutritionist = document.getElementById('doc-nutritionist');
+  const step2Heading = document.getElementById('step-2-heading');
+
+  // Timezone modal elements
+  const tzModal = document.getElementById('timezone-modal');
+  const tzConfirmBtn = document.getElementById('timezone-modal-confirm');
+  const countrySelector = document.getElementById('country-selector');
+
+  // Timezone popup modal interactions
+  if (tzModal && tzConfirmBtn && countrySelector) {
+    // Show modal automatically
+    tzModal.classList.add('open');
+
+    tzConfirmBtn.addEventListener('click', () => {
+      selectedCountry = countrySelector.value;
+      const config = countryConfig[selectedCountry];
+      currencySymbol = config.symbol;
+      currencyCode = config.code;
+      
+      // Close modal
+      tzModal.classList.remove('open');
+    });
+  }
 
   if (bookingNext && bookingPrev) {
 
     // Step 1 toggling
-    if (offlineCard && teleCard) {
-      offlineCard.addEventListener('click', () => {
-        offlineCard.classList.add('active');
-        teleCard.classList.remove('active');
-        consultType = 'In-Clinic Consultation';
-      });
+    const selectConsultType = (type, activeCard, inactiveCards) => {
+      consultType = type;
+      activeCard.classList.add('active');
+      inactiveCards.forEach(card => card.classList.remove('active'));
 
-      teleCard.addEventListener('click', () => {
-        teleCard.classList.add('active');
-        offlineCard.classList.remove('active');
-        consultType = 'Telehealth Video Consult';
-      });
+      // If Nutritionist Teleconsult is selected, modify Step 2 view
+      if (type === 'Nutritionist Teleconsult') {
+        if (docNutritionist) docNutritionist.style.display = 'block';
+        if (docJyo) docJyo.style.display = 'none';
+        if (docKalyan) docKalyan.style.display = 'none';
+        
+        // Select Nutritionist as default doctor
+        if (docNutritionist && docJyo && docKalyan) {
+          docNutritionist.classList.add('active');
+          docJyo.classList.remove('active');
+          docKalyan.classList.remove('active');
+        }
+        doctorName = 'Ms. Ananya Sen';
+        if (step2Heading) step2Heading.innerText = 'Select Nutrition Specialist';
+      } else {
+        if (docNutritionist) docNutritionist.style.display = 'none';
+        if (docJyo) docJyo.style.display = 'block';
+        if (docKalyan) docKalyan.style.display = 'block';
+        
+        // Default to Dr Jyo
+        if (docNutritionist && docJyo && docKalyan) {
+          docJyo.classList.add('active');
+          docNutritionist.classList.remove('active');
+          docKalyan.classList.remove('active');
+        }
+        doctorName = 'Dr. K. Jyothirmayi';
+        if (step2Heading) step2Heading.innerText = 'Select Pediatrician';
+      }
+    };
+
+    if (offlineCard && teleCard && nutritionCard) {
+      offlineCard.addEventListener('click', () => selectConsultType('In-Clinic Consultation', offlineCard, [teleCard, nutritionCard]));
+      teleCard.addEventListener('click', () => selectConsultType('Telehealth Video Consult', teleCard, [offlineCard, nutritionCard]));
+      nutritionCard.addEventListener('click', () => selectConsultType('Nutritionist Teleconsult', nutritionCard, [offlineCard, teleCard]));
     }
 
     // Step 2 toggling
-    if (docJyo && docX) {
+    if (docJyo && docKalyan && docNutritionist) {
       docJyo.addEventListener('click', () => {
         docJyo.classList.add('active');
-        docX.classList.remove('active');
+        docKalyan.classList.remove('active');
+        docNutritionist.classList.remove('active');
         doctorName = 'Dr. K. Jyothirmayi';
-        consultationPrice = 500;
       });
 
-      docX.addEventListener('click', () => {
-        docX.classList.add('active');
+      docKalyan.addEventListener('click', () => {
+        docKalyan.classList.add('active');
         docJyo.classList.remove('active');
-        doctorName = 'Dr. Rohan Sharma';
-        consultationPrice = 400; // Mock consultant fee
+        docNutritionist.classList.remove('active');
+        doctorName = 'Dr. Kalyan C. Bathineni';
+      });
+
+      docNutritionist.addEventListener('click', () => {
+        docNutritionist.classList.add('active');
+        docJyo.classList.remove('active');
+        docKalyan.classList.remove('active');
+        doctorName = 'Ms. Ananya Sen';
       });
     }
 
@@ -455,14 +574,15 @@ document.addEventListener('DOMContentLoaded', () => {
       appointmentTime = ''; // reset on date change
 
       slotsList.forEach(slot => {
+        const converted = getTimezoneTime(slot, selectedCountry);
         const pill = document.createElement('button');
         pill.classList.add('wizard-slot-pill');
-        pill.innerText = slot;
+        pill.innerText = converted;
 
         pill.addEventListener('click', () => {
           document.querySelectorAll('.wizard-slot-pill').forEach(p => p.classList.remove('active'));
           pill.classList.add('active');
-          appointmentTime = slot;
+          appointmentTime = converted;
         });
 
         slotsTimeGrid.appendChild(pill);
@@ -471,12 +591,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Step 4: Checkout Summary Update
     const renderCheckoutSummary = () => {
+      const price = getPriceForSelectedDoctor();
       document.getElementById('sum-type').innerText = consultType;
       document.getElementById('sum-doc').innerText = doctorName;
       document.getElementById('sum-date').innerText = appointmentDate;
       document.getElementById('sum-time').innerText = appointmentTime || 'Select Time';
-      document.getElementById('sum-fee').innerText = `₹${consultationPrice}.00`;
-      document.getElementById('sum-total').innerText = `₹${consultationPrice}.00`;
+      document.getElementById('sum-fee').innerText = `${currencySymbol}${price}.00`;
+      document.getElementById('sum-total').innerText = `${currencySymbol}${price}.00`;
     };
 
     // Stepper Navigation Handler
@@ -545,15 +666,14 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         // Confirm booking, display success screen
         const payMethod = document.querySelector('input[name="pay-method"]:checked').value;
+        const price = getPriceForSelectedDoctor();
         let successMsg = '';
 
         if (payMethod === 'upi') {
           const upiId = document.getElementById('upi-id').value || 'your VPA ID';
-          successMsg = `Congratulations! Your ${consultType} with ${doctorName} is scheduled for ${appointmentDate} at ${appointmentTime}. A secure UPI payment request of ₹${consultationPrice}.00 was pushed to ${upiId}.`;
+          successMsg = `Congratulations! Your ${consultType} with ${doctorName} is scheduled for ${appointmentDate} at ${appointmentTime}. A secure UPI payment request of ${currencySymbol}${price}.00 was pushed to ${upiId}.`;
         } else if (payMethod === 'card') {
-          successMsg = `Payment of ₹${consultationPrice}.00 received successfully. Your ${consultType} with ${doctorName} is confirmed for ${appointmentDate} at ${appointmentTime}.`;
-        } else {
-          successMsg = `Your ${consultType} with ${doctorName} is scheduled for ${appointmentDate} at ${appointmentTime}. You have chosen to pay at the clinic counter.`;
+          successMsg = `Payment of ${currencySymbol}${price}.00 received successfully. Your ${consultType} with ${doctorName} is confirmed for ${appointmentDate} at ${appointmentTime}.`;
         }
 
         // Hide inputs and next buttons, display success
@@ -578,68 +698,48 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const payUpi = document.getElementById('pay-upi-pill');
   const payCard = document.getElementById('pay-card-pill');
-  const payCounter = document.getElementById('pay-counter-pill');
 
   const upiInputPane = document.getElementById('upi-inputs-panel');
   const ccInputPane = document.getElementById('cc-inputs-panel');
-  const counterInputPane = document.getElementById('counter-inputs-panel');
   const ccGraphic = document.getElementById('payment-card-graphic');
 
   const showUpiForm = () => {
-    payUpi.classList.add('active');
-    payCard.classList.remove('active');
-    payCounter.classList.remove('active');
+    if (payUpi) payUpi.classList.add('active');
+    if (payCard) payCard.classList.remove('active');
     
-    upiInputPane.style.display = 'block';
-    ccInputPane.style.display = 'none';
-    counterInputPane.style.display = 'none';
-    ccGraphic.style.display = 'none';
+    if (upiInputPane) upiInputPane.style.display = 'block';
+    if (ccInputPane) ccInputPane.style.display = 'none';
+    if (ccGraphic) ccGraphic.style.display = 'none';
   };
 
   const showCardForm = () => {
-    payCard.classList.add('active');
-    payUpi.classList.remove('active');
-    payCounter.classList.remove('active');
+    if (payCard) payCard.classList.add('active');
+    if (payUpi) payUpi.classList.remove('active');
     
-    ccInputPane.style.display = 'block';
-    ccGraphic.style.display = 'block';
-    upiInputPane.style.display = 'none';
-    counterInputPane.style.display = 'none';
+    if (ccInputPane) ccInputPane.style.display = 'block';
+    if (ccGraphic) ccGraphic.style.display = 'block';
+    if (upiInputPane) upiInputPane.style.display = 'none';
   };
 
-  const showCounterForm = () => {
-    payCounter.classList.add('active');
-    payUpi.classList.remove('active');
-    payCard.classList.remove('active');
-    
-    counterInputPane.style.display = 'block';
-    upiInputPane.style.display = 'none';
-    ccInputPane.style.display = 'none';
-    ccGraphic.style.display = 'none';
-  };
-
-  if (payUpi && payCard && payCounter) {
+  if (payUpi && payCard) {
     // Radio buttons change tracking
     document.querySelectorAll('input[name="pay-method"]').forEach(radio => {
       radio.addEventListener('change', (e) => {
         if (e.target.value === 'upi') showUpiForm();
         if (e.target.value === 'card') showCardForm();
-        if (e.target.value === 'counter') showCounterForm();
       });
     });
     
     // Fallback pill click handlers
     payUpi.addEventListener('click', () => {
-      document.querySelector('input[name="pay-method"][value="upi"]').checked = true;
+      const radio = document.querySelector('input[name="pay-method"][value="upi"]');
+      if (radio) radio.checked = true;
       showUpiForm();
     });
     payCard.addEventListener('click', () => {
-      document.querySelector('input[name="pay-method"][value="card"]').checked = true;
+      const radio = document.querySelector('input[name="pay-method"][value="card"]');
+      if (radio) radio.checked = true;
       showCardForm();
-    });
-    payCounter.addEventListener('click', () => {
-      document.querySelector('input[name="pay-method"][value="counter"]').checked = true;
-      showCounterForm();
     });
   }
 
@@ -675,7 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formatted += val[i];
       }
       e.target.value = formatted;
-      ccNumPreview.innerText = formatted || '•••• •••• •••• ••••';
+      if (ccNumPreview) ccNumPreview.innerText = formatted || '•••• •••• •••• ••••';
     });
 
     // Formatting expiry (MM/YY)
@@ -685,20 +785,79 @@ document.addEventListener('DOMContentLoaded', () => {
         val = val.substring(0, 2) + '/' + val.substring(2, 4);
       }
       e.target.value = val;
-      ccExpiryPreview.innerText = val || 'MM/YY';
+      if (ccExpiryPreview) ccExpiryPreview.innerText = val || 'MM/YY';
     });
 
     // Syncing Cardholder name
     ccNameInput.addEventListener('input', (e) => {
-      ccNamePreview.innerText = e.target.value.toUpperCase() || 'YOUR NAME';
+      if (ccNamePreview) ccNamePreview.innerText = e.target.value.toUpperCase() || 'YOUR NAME';
     });
 
-    // Syncing CVV
+    // Formatting CVV
     ccCvvInput.addEventListener('input', (e) => {
       let val = e.target.value.replace(/[^0-9]/gi, '');
       e.target.value = val;
-      ccCvvPreview.innerText = val || '•••';
+      if (ccCvvPreview) ccCvvPreview.innerText = val || '•••';
+    });
+  }
+
+  // ==========================================
+  // 6. Resources Page Interactive Filtering & Search
+  // ==========================================
+  window.filterResources = function(type) {
+    const cards = document.querySelectorAll('.resource-card-link');
+    const btnAll = document.getElementById('filter-btn-all');
+    const btnTools = document.getElementById('filter-btn-tools');
+    const btnBlogs = document.getElementById('filter-btn-blogs');
+
+    // Toggle active class on filter buttons
+    if (btnAll) btnAll.classList.toggle('active', type === 'all');
+    if (btnTools) btnTools.classList.toggle('active', type === 'tools');
+    if (btnBlogs) btnBlogs.classList.toggle('active', type === 'blogs');
+
+    cards.forEach(card => {
+      const cardType = card.getAttribute('data-type');
+      const searchInput = document.getElementById('resource-search-input');
+      const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+      const matchesType = (type === 'all' || cardType === type);
+      const cardText = card.textContent.toLowerCase();
+      const matchesSearch = !searchQuery || cardText.includes(searchQuery);
+
+      if (matchesType && matchesSearch) {
+        card.style.display = 'block';
+        // Small delay to trigger CSS opacity transition
+        requestAnimationFrame(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+        });
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          if (card.style.opacity === '0') {
+            card.style.display = 'none';
+          }
+        }, 300);
+      }
+    });
+  };
+
+  // Search input change handler
+  const searchInput = document.getElementById('resource-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      // Find currently active category type
+      let activeType = 'all';
+      const btnTools = document.getElementById('filter-btn-tools');
+      const btnBlogs = document.getElementById('filter-btn-blogs');
+      
+      if (btnTools && btnTools.classList.contains('active')) activeType = 'tools';
+      else if (btnBlogs && btnBlogs.classList.contains('active')) activeType = 'blogs';
+
+      window.filterResources(activeType);
     });
   }
 
 });
+

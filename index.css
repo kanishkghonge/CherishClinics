@@ -1,5 +1,5 @@
 /* index.css - Cherish Children's Clinic Design System & Styles */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   /* Earth-Toned Luxury Palette */
@@ -28,7 +28,7 @@
   --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-quick: all 0.25s ease;
   
-  --font-heading: 'Outfit', sans-serif;
+  --font-heading: 'Playfair Display', serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -2675,3 +2675,118 @@ footer {
   transform: translateX(-4px);
   box-shadow: 0 6px 15px rgba(62, 92, 74, 0.15);
 }
+
+/* Timezone Modal Overlay */
+.timezone-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(26, 36, 31, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.timezone-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.timezone-modal-card {
+  width: 90%;
+  max-width: 500px;
+  padding: 3rem;
+  text-align: center;
+  transform: scale(0.9);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.timezone-modal-overlay.open .timezone-modal-card {
+  transform: scale(1);
+}
+
+.timezone-modal-header .modal-icon {
+  font-size: 3rem;
+  color: var(--sage-green);
+  margin-bottom: 1.5rem;
+}
+
+.timezone-modal-header h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.timezone-modal-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.modal-dropdown-select {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%233e5c4a' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 20px;
+}
+
+.timezone-modal-footer {
+  margin-top: 2.5rem;
+}
+
+.timezone-modal-footer button {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Resources Page Beautification & Search Enhancements */
+#resource-search-input:focus {
+  outline: none;
+  border-color: var(--sage-green) !important;
+  box-shadow: 0 0 0 4px rgba(62, 92, 74, 0.1) !important;
+  background: #ffffff !important;
+}
+
+.resource-badge-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.badge-sage {
+  background: var(--bg-sage-light);
+  color: var(--sage-green);
+}
+
+.badge-rose {
+  background: var(--bg-rose-light);
+  color: var(--terracotta-rose);
+}
+
+.resource-card-link {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+  opacity: 1;
+  transform: scale(1);
+}
+
