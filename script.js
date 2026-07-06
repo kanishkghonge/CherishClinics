@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Base pricing in INR
   const basePrices = {
     'Dr. K. Jyothirmayi': 500,
-    'Dr. Kalyan C. Bathineni': 500,
+    'Dr. Kalyan C. Battineni': 500,
     'Ms. Ananya Sen': 500
   };
 
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const getPriceForSelectedDoctor = () => {
     const config = countryConfig[selectedCountry];
     if (doctorName === 'Dr. K. Jyothirmayi') return config.Jyo;
-    if (doctorName === 'Dr. Kalyan C. Bathineni') return config.Kalyan;
+    if (doctorName === 'Dr. Kalyan C. Battineni') return config.Kalyan;
     if (doctorName === 'Ms. Ananya Sen') return config.Nutritionist;
     return config.Jyo;
   };
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
         docKalyan.classList.add('active');
         docJyo.classList.remove('active');
         docNutritionist.classList.remove('active');
-        doctorName = 'Dr. Kalyan C. Bathineni';
+        doctorName = 'Dr. Kalyan C. Battineni';
       });
 
       docNutritionist.addEventListener('click', () => {
@@ -860,4 +860,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
-

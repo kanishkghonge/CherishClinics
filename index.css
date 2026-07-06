@@ -1,34 +1,34 @@
 /* index.css - Cherish Children's Clinic Design System & Styles */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Earth-Toned Luxury Palette */
-  --bg-primary: #faf7f2;        /* Warm Oat/Cream main background */
-  --bg-secondary: #f4edd9;      /* Deeper warm sand */
-  --bg-sage-light: #eef4f0;     /* Soft Light Mint */
-  --bg-rose-light: #fbf1f0;     /* Soft Terracotta Blush */
+  /* Warm, child-first palette inspired by the clinic reference */
+  --bg-primary: #faf7ef;
+  --bg-secondary: #fff2d2;
+  --bg-sage-light: #fff0c7;
+  --bg-rose-light: #ffe8df;
   
-  --sage-green: #3e5c4a;        /* Rich Forest Sage Green */
-  --sage-green-hover: #2e4436;
-  --sage-green-glow: rgba(62, 92, 74, 0.08);
+  --sage-green: #1976c9;
+  --sage-green-hover: #0e5fa8;
+  --sage-green-glow: rgba(25, 118, 201, 0.1);
   
-  --terracotta-rose: #c67b73;    /* Warm Terracotta Rose */
-  --terracotta-rose-hover: #b46860;
-  --terracotta-rose-glow: rgba(198, 123, 115, 0.08);
+  --terracotta-rose: #ef7fa5;
+  --terracotta-rose-hover: #dd648f;
+  --terracotta-rose-glow: rgba(239, 127, 165, 0.12);
   
-  --text-primary: #1a241f;      /* Deep Forest Charcoal */
-  --text-secondary: #4e5d54;    /* Muted Sage Slate */
+  --text-primary: #185b96;
+  --text-secondary: #56515d;
   
-  --border-color: rgba(62, 92, 74, 0.12);
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.75);
-  --glass-shadow: 0 10px 35px 0 rgba(62, 92, 74, 0.05);
-  --glass-shadow-hover: 0 20px 50px 0 rgba(62, 92, 74, 0.1);
+  --border-color: rgba(25, 118, 201, 0.14);
+  --glass-bg: #fffdf8;
+  --glass-border: rgba(25, 118, 201, 0.12);
+  --glass-shadow: 0 12px 30px rgba(28, 91, 145, 0.07);
+  --glass-shadow-hover: 0 18px 38px rgba(28, 91, 145, 0.12);
   
   --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-quick: all 0.25s ease;
   
-  --font-heading: 'Playfair Display', serif;
+  --font-heading: 'Fredoka', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -59,6 +59,7 @@ body {
   flex-direction: column;
   opacity: 0;
   animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  background-image: none;
 }
 
 @keyframes pageFadeIn {
@@ -98,7 +99,7 @@ button {
   filter: blur(120px);
   -webkit-filter: blur(120px);
   z-index: -1;
-  opacity: 0.55;
+  display: none;
   pointer-events: none;
   animation: floatBlob 24s infinite alternate ease-in-out;
 }
@@ -204,8 +205,8 @@ main {
 
 /* Buttons (Modern magnetic style indicators) */
 .btn-primary {
-  background-color: var(--sage-green);
-  color: #fff;
+  background-color: #ffd166;
+  color: #15598f;
   padding: 0.9rem 2.25rem;
   font-size: 1rem;
   font-weight: 600;
@@ -213,12 +214,13 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  box-shadow: 0 6px 20px rgba(62, 92, 74, 0.2);
+  box-shadow: 0 6px 18px rgba(222, 173, 48, 0.2);
   border: 1px solid transparent;
 }
 
 .btn-primary:hover {
-  background-color: var(--sage-green-hover);
+  background-color: #ffc845;
+  color: #15598f;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(62, 92, 74, 0.3);
 }
@@ -314,8 +316,8 @@ header .logo-container .logo-svg {
 }
 
 header .logo-container .logo-img {
-  width: 38px;
-  height: 38px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
   border-radius: 8px;
 }
@@ -487,8 +489,10 @@ header .logo-container h1 span.clinic-sub {
   grid-template-columns: 1.1fr 0.9fr;
   gap: 4rem;
   align-items: center;
-  padding: 3rem 0 5rem 0;
+  padding: 4.5rem 0 6rem 0;
+  position: relative;
 }
+
 
 .hero-tag {
   background-color: var(--bg-sage-light);
@@ -501,6 +505,7 @@ header .logo-container h1 span.clinic-sub {
   border-radius: 30px;
   margin-bottom: 1.5rem;
   display: inline-block;
+  border: 1px solid #f3c552;
 }
 
 .hero-text h1 {
@@ -509,6 +514,7 @@ header .logo-container h1 span.clinic-sub {
   line-height: 1.15;
   margin-bottom: 1.5rem;
   letter-spacing: -1.5px;
+  max-width: 660px;
 }
 
 .hero-text h1 span.highlight-rose {
@@ -541,12 +547,41 @@ header .logo-container h1 span.clinic-sub {
   gap: 1rem;
 }
 
+.hero-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: 1.5rem;
+  color: var(--sage-green);
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.hero-phone > i {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #15598f;
+  background: #ffd166;
+}
+
+.hero-phone span { display: flex; flex-direction: column; line-height: 1.1; }
+.hero-phone small { font-family: var(--font-body); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text-secondary); margin-bottom: .25rem; }
+.hero-phone:hover { transform: translateY(-2px); }
+
 /* Home hero card right side */
 .hero-badge-card {
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  border: 2px solid #91b7ef;
+  border-radius: 180px 180px 26px 26px;
+  background: #fffaf0;
+  padding-top: 4rem;
 }
 
 .badge-doctor-row {
@@ -556,11 +591,12 @@ header .logo-container h1 span.clinic-sub {
 }
 
 .badge-doctor-img {
-  width: 75px;
-  height: 75px;
+  width: 105px;
+  height: 105px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #fff;
+  border: 4px solid #fff;
+  object-position: center 18%;
   box-shadow: 0 4px 15px rgba(62,92,74,0.1);
 }
 
@@ -629,14 +665,16 @@ header .logo-container h1 span.clinic-sub {
 }
 
 .strip-item {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
+.hero-contact-strip .strip-item:first-child { color: var(--sage-green); font-weight: 800; }
+
 /* Home Section Previews styling */
 .home-section-teaser {
-  padding: 5rem 0;
+  padding: 5rem 0 2rem;
   border-top: 1px solid rgba(62,92,74,0.06);
 }
 
@@ -663,7 +701,14 @@ header .logo-container h1 span.clinic-sub {
 .highlight-card {
   padding: 2.5rem;
   text-align: left;
+  border-bottom: 5px solid var(--terracotta-rose);
 }
+
+.highlight-card:nth-child(even) { border-bottom-color: var(--sage-green); }
+.highlight-card:hover { transform: translateY(-6px); }
+
+.home-section-teaser .reviews-grid-masonry { grid-template-columns: repeat(2, 1fr); }
+.home-section-teaser .review-item-card { border: 1.5px solid #91b7ef; background: #fffaf0; }
 
 .highlight-icon-box {
   width: 52px;
@@ -830,7 +875,10 @@ header .logo-container h1 span.clinic-sub {
   display: flex;
   flex-direction: column;
   height: 100%;
+  border-top: 5px solid rgba(13, 163, 210, .55);
 }
+
+.service-card-premium:nth-child(even) { border-top-color: rgba(240, 83, 89, .55); }
 
 .service-icon-svg {
   width: 48px;
@@ -2069,6 +2117,14 @@ footer {
   font-size: 0.85rem;
 }
 
+.footer-bottom-bar a {
+  color: var(--sage-green);
+  font-weight: 800;
+}
+
+.footer-bottom-bar a:hover { text-decoration: underline; }
+.footer-love { color: #ef6f91; font-size: 1rem; }
+
 /* ==========================================
    FLOATING WHATSAPP & MOBILE MENU OVERLAYS
    ========================================== */
@@ -2789,4 +2845,3 @@ footer {
   opacity: 1;
   transform: scale(1);
 }
-
