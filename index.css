@@ -1,5 +1,5 @@
 /* index.css - Cherish Children's Clinic Design System & Styles */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&family=Great+Vibes&family=Parisienne&family=Playball&display=swap');
 
 :root {
   /* Warm, child-first palette inspired by the clinic reference */
@@ -30,6 +30,9 @@
   
   --font-heading: 'Fredoka', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
+  
+  /* Feminine curly logo font options: 'Dancing Script', 'Great Vibes', 'Parisienne', 'Playball' */
+  --font-logo: 'Dancing Script', cursive;
 }
 
 /* Base resets & animations */
@@ -323,18 +326,21 @@ header .logo-container .logo-img {
 }
 
 header .logo-container h1 {
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-family: var(--font-logo);
+  font-size: 1.95rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 1.1;
   display: flex;
   flex-direction: column;
 }
 
 header .logo-container h1 span.clinic-sub {
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  text-transform: none;
+  letter-spacing: 0.2px;
   color: var(--terracotta-rose);
   margin-top: -3px;
 }

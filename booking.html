@@ -25,18 +25,22 @@
       <div class="timezone-modal-header">
         <i class="fa-solid fa-earth-americas modal-icon"></i>
         <h3>Select Your Region</h3>
-        <p>Timings shown here default to Indian Standard Time (IST). If you are visiting from outside India, please select your country to adjust session times accordingly.</p>
+        <p>All consultation slots are shown in Indian Standard Time (IST). Please select your country so we can show the right consultation options and timing windows.</p>
       </div>
       <div class="timezone-modal-body">
         <div class="form-field-group" style="text-align: left; margin-bottom: 1rem;">
           <label for="country-selector" style="font-weight: 600; display: block; margin-bottom: 0.5rem; color: var(--text-primary);">Select Country</label>
           <select id="country-selector" class="modal-dropdown-select">
             <option value="in" selected>India (IST)</option>
-            <option value="us">United States (EST)</option>
-            <option value="uk">United Kingdom (GMT)</option>
-            <option value="au">Australia (AEST)</option>
-            <option value="nz">New Zealand (NZST)</option>
-            <option value="other">Other Region (UTC)</option>
+            <option value="gulf">Gulf Region</option>
+            <option value="sg">Singapore</option>
+            <option value="my">Malaysia</option>
+            <option value="au">Australia</option>
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+            <option value="uk">United Kingdom</option>
+            <option value="eu">Europe</option>
+            <option value="other">Other Region</option>
           </select>
         </div>
       </div>
@@ -210,7 +214,7 @@
             <!-- Generated via JS -->
           </div>
 
-          <h4 style="font-size: 1.05rem; margin-bottom: 1rem; font-weight: 700;">Available Timeslots</h4>
+          <h4 style="font-size: 1.05rem; margin-bottom: 1rem; font-weight: 700;">Available Timeslots (IST)</h4>
           <div class="wizard-slots-grid-pane" id="slots-time-grid">
             <!-- Generated via JS -->
           </div>
@@ -243,12 +247,12 @@
               </div>
               <div class="checkout-summary-row">
                 <span style="color: var(--text-secondary);">Consultation Fee</span>
-                <span id="sum-fee">₹500.00</span>
+                <span id="sum-fee">₹800.00</span>
               </div>
               
               <div class="checkout-summary-row total-row">
                 <span>Total Due</span>
-                <span id="sum-total">₹500.00</span>
+                <span id="sum-total">₹800.00</span>
               </div>
             </div>
 

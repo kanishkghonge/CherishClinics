@@ -358,60 +358,26 @@ document.addEventListener('DOMContentLoaded', () => {
   let currencySymbol = '₹';
   let currencyCode = 'INR';
 
-  // Base pricing in INR
-  const basePrices = {
-    'Dr. K. Jyothirmayi': 500,
-    'Dr. Kalyan C. Battineni': 500,
-    'Ms. Ananya Sen': 500
-  };
-
-  // Conversions for major countries (pricing maps)
+  // Consultation regions and pricing
   const countryConfig = {
-    'in': { symbol: '₹', code: 'INR', tzLabel: 'IST', Jyo: 500, Kalyan: 500, Nutritionist: 500 },
-    'us': { symbol: '$', code: 'USD', tzLabel: 'EST', Jyo: 25, Kalyan: 25, Nutritionist: 25 },
-    'uk': { symbol: '£', code: 'GBP', tzLabel: 'GMT', Jyo: 20, Kalyan: 20, Nutritionist: 20 },
-    'au': { symbol: 'A$', code: 'AUD', tzLabel: 'AEST', Jyo: 35, Kalyan: 35, Nutritionist: 35 },
-    'nz': { symbol: 'NZ$', code: 'NZD', tzLabel: 'NZST', Jyo: 40, Kalyan: 40, Nutritionist: 40 },
-    'other': { symbol: '$', code: 'USD', tzLabel: 'UTC', Jyo: 25, Kalyan: 25, Nutritionist: 25 }
+    'in': { symbol: '₹', code: 'INR', region: 'india' },
+    'gulf': { symbol: '₹', code: 'INR', region: 'regional' },
+    'sg': { symbol: '₹', code: 'INR', region: 'regional' },
+    'my': { symbol: '₹', code: 'INR', region: 'regional' },
+    'au': { symbol: '₹', code: 'INR', region: 'regional' },
+    'us': { symbol: '₹', code: 'INR', region: 'international' },
+    'ca': { symbol: '₹', code: 'INR', region: 'international' },
+    'uk': { symbol: '₹', code: 'INR', region: 'international' },
+    'eu': { symbol: '₹', code: 'INR', region: 'international' },
+    'other': { symbol: '₹', code: 'INR', region: 'international' }
   };
 
-  const getTimezoneTime = (istTime, country) => {
-    // Mapping of slot conversions
-    const conversionMap = {
-      'in': {
-        "10:30 AM": "10:30 AM IST", "11:00 AM": "11:00 AM IST", "11:30 AM": "11:30 AM IST", "12:00 PM": "12:00 PM IST",
-        "5:30 PM": "5:30 PM IST", "6:00 PM": "6:00 PM IST", "6:30 PM": "6:30 PM IST", "7:00 PM": "7:00 PM IST"
-      },
-      'us': {
-        "10:30 AM": "12:00 AM EST", "11:00 AM": "12:30 AM EST", "11:30 AM": "1:00 AM EST", "12:00 PM": "1:30 AM EST",
-        "5:30 PM": "7:00 AM EST", "6:00 PM": "7:30 AM EST", "6:30 PM": "8:00 AM EST", "7:00 PM": "8:30 AM EST"
-      },
-      'uk': {
-        "10:30 AM": "6:00 AM GMT", "11:00 AM": "6:30 AM GMT", "11:30 AM": "7:00 AM GMT", "12:00 PM": "7:30 AM GMT",
-        "5:30 PM": "1:00 PM GMT", "6:00 PM": "1:30 PM GMT", "6:30 PM": "2:00 PM GMT", "7:00 PM": "2:30 PM GMT"
-      },
-      'au': {
-        "10:30 AM": "3:00 PM AEST", "11:00 AM": "3:30 PM AEST", "11:30 AM": "4:00 PM AEST", "12:00 PM": "4:30 PM AEST",
-        "5:30 PM": "10:00 PM AEST", "6:00 PM": "10:30 PM AEST", "6:30 PM": "11:00 PM AEST", "7:00 PM": "11:30 PM AEST"
-      },
-      'nz': {
-        "10:30 AM": "5:00 PM NZST", "11:00 AM": "5:30 PM NZST", "11:30 AM": "6:00 PM NZST", "12:00 PM": "6:30 PM NZST",
-        "5:30 PM": "12:00 AM NZST", "6:00 PM": "12:30 AM NZST", "6:30 PM": "1:00 AM NZST", "7:00 PM": "1:30 AM NZST"
-      },
-      'other': {
-        "10:30 AM": "5:00 AM UTC", "11:00 AM": "5:30 AM UTC", "11:30 AM": "6:00 AM UTC", "12:00 PM": "6:30 AM UTC",
-        "5:30 PM": "12:00 PM UTC", "6:00 PM": "12:30 PM UTC", "6:30 PM": "1:00 PM UTC", "7:00 PM": "1:30 PM UTC"
-      }
-    };
-    return conversionMap[country][istTime] || `${istTime} (IST)`;
+  const getTimezoneTime = (istTime) => {
+    return `${istTime} IST`;
   };
 
   const getPriceForSelectedDoctor = () => {
-    const config = countryConfig[selectedCountry];
-    if (doctorName === 'Dr. K. Jyothirmayi') return config.Jyo;
-    if (doctorName === 'Dr. Kalyan C. Battineni') return config.Kalyan;
-    if (doctorName === 'Ms. Ananya Sen') return config.Nutritionist;
-    return config.Jyo;
+    return selectedCountry === 'in' ? 800 : 1500;
   };
 
   // DOM Elements
@@ -434,6 +400,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const tzConfirmBtn = document.getElementById('timezone-modal-confirm');
   const countrySelector = document.getElementById('country-selector');
 
+  const isForeignCountry = () => selectedCountry !== 'in';
+
+  const applyCountryConsultVisibility = () => {
+    if (!offlineCard || !teleCard || !nutritionCard) return;
+
+    if (isForeignCountry()) {
+      offlineCard.style.display = 'none';
+      if (consultType === 'In-Clinic Consultation') {
+        consultType = 'Telehealth Video Consult';
+        teleCard.classList.add('active');
+        offlineCard.classList.remove('active');
+        nutritionCard.classList.remove('active');
+      }
+    } else {
+      offlineCard.style.display = '';
+    }
+  };
+
   // Timezone popup modal interactions
   if (tzModal && tzConfirmBtn && countrySelector) {
     // Show modal automatically
@@ -441,9 +425,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tzConfirmBtn.addEventListener('click', () => {
       selectedCountry = countrySelector.value;
-      const config = countryConfig[selectedCountry];
+      const config = countryConfig[selectedCountry] || countryConfig.in;
       currencySymbol = config.symbol;
       currencyCode = config.code;
+      applyCountryConsultVisibility();
       
       // Close modal
       tzModal.classList.remove('open');
@@ -454,9 +439,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Step 1 toggling
     const selectConsultType = (type, activeCard, inactiveCards) => {
+      if (type === 'In-Clinic Consultation' && isForeignCountry()) return;
+
       consultType = type;
       activeCard.classList.add('active');
       inactiveCards.forEach(card => card.classList.remove('active'));
+      appointmentDate = '';
+      appointmentTime = '';
 
       // If Nutritionist Teleconsult is selected, modify Step 2 view
       if (type === 'Nutritionist Teleconsult') {
@@ -489,6 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (offlineCard && teleCard && nutritionCard) {
+      applyCountryConsultVisibility();
       offlineCard.addEventListener('click', () => selectConsultType('In-Clinic Consultation', offlineCard, [teleCard, nutritionCard]));
       teleCard.addEventListener('click', () => selectConsultType('Telehealth Video Consult', teleCard, [offlineCard, nutritionCard]));
       nutritionCard.addEventListener('click', () => selectConsultType('Nutritionist Teleconsult', nutritionCard, [offlineCard, teleCard]));
@@ -501,6 +491,12 @@ document.addEventListener('DOMContentLoaded', () => {
         docKalyan.classList.remove('active');
         docNutritionist.classList.remove('active');
         doctorName = 'Dr. K. Jyothirmayi';
+        appointmentDate = '';
+        appointmentTime = '';
+        if (activeStep === 3) {
+          generateWizardDates();
+          generateWizardTimeSlots();
+        }
       });
 
       docKalyan.addEventListener('click', () => {
@@ -508,6 +504,12 @@ document.addEventListener('DOMContentLoaded', () => {
         docJyo.classList.remove('active');
         docNutritionist.classList.remove('active');
         doctorName = 'Dr. Kalyan C. Battineni';
+        appointmentDate = '';
+        appointmentTime = '';
+        if (activeStep === 3) {
+          generateWizardDates();
+          generateWizardTimeSlots();
+        }
       });
 
       docNutritionist.addEventListener('click', () => {
@@ -515,6 +517,12 @@ document.addEventListener('DOMContentLoaded', () => {
         docJyo.classList.remove('active');
         docKalyan.classList.remove('active');
         doctorName = 'Ms. Ananya Sen';
+        appointmentDate = '';
+        appointmentTime = '';
+        if (activeStep === 3) {
+          generateWizardDates();
+          generateWizardTimeSlots();
+        }
       });
     }
 
@@ -522,20 +530,75 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateScrollRow = document.getElementById('date-scroll-row');
     const slotsTimeGrid = document.getElementById('slots-time-grid');
 
+    const parseTimeToMinutes = (time) => {
+      const match = time.match(/^(\d{1,2}):(\d{2})\s(AM|PM)$/);
+      if (!match) return 0;
+      let hours = Number(match[1]);
+      const minutes = Number(match[2]);
+      const period = match[3];
+
+      if (period === 'PM' && hours !== 12) hours += 12;
+      if (period === 'AM' && hours === 12) hours = 0;
+
+      return (hours * 60) + minutes;
+    };
+
+    const formatMinutesToTime = (totalMinutes) => {
+      const hours24 = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const period = hours24 >= 12 ? 'PM' : 'AM';
+      const hours12 = hours24 % 12 || 12;
+      return `${hours12}:${String(minutes).padStart(2, '0')} ${period}`;
+    };
+
+    const buildSlots = (startTime, endTime) => {
+      const slots = [];
+      const start = parseTimeToMinutes(startTime);
+      const end = parseTimeToMinutes(endTime);
+
+      for (let time = start; time < end; time += 15) {
+        slots.push(formatMinutesToTime(time));
+      }
+
+      return slots;
+    };
+
+    const getConsultWindow = () => {
+      const config = countryConfig[selectedCountry] || countryConfig.in;
+
+      if (doctorName === 'Dr. Kalyan C. Battineni') {
+        return { days: [1, 2, 3, 4, 5, 6], start: '5:30 PM', end: '8:00 PM' };
+      }
+
+      if (doctorName === 'Ms. Ananya Sen') {
+        return { days: [1, 2, 3, 4, 5, 6], start: '5:30 PM', end: '8:00 PM' };
+      }
+
+      if (consultType === 'In-Clinic Consultation') {
+        return { days: [1, 2, 3, 4, 5, 6], start: '9:00 AM', end: '2:00 PM' };
+      }
+
+      if (config.region === 'international') {
+        return { days: [2, 4], start: '8:00 PM', end: '9:00 PM' };
+      }
+
+      return { days: [1, 3, 5], start: '2:30 PM', end: '3:30 PM' };
+    };
+
     const generateWizardDates = () => {
       dateScrollRow.innerHTML = '';
       const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const consultWindow = getConsultWindow();
       
       const today = new Date();
       let createdCount = 0;
 
-      for (let i = 0; i < 7 && createdCount < 4; i++) {
+      for (let i = 0; i < 21 && createdCount < 4; i++) {
         const futDate = new Date();
         futDate.setDate(today.getDate() + i + 1);
 
-        // Skip Sunday
-        if (futDate.getDay() === 0) continue;
+        if (!consultWindow.days.includes(futDate.getDay())) continue;
 
         const dayName = days[futDate.getDay()];
         const dateNum = futDate.getDate();
@@ -567,14 +630,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    const slotsList = ["10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM"];
-
     const generateWizardTimeSlots = () => {
       slotsTimeGrid.innerHTML = '';
       appointmentTime = ''; // reset on date change
+      const consultWindow = getConsultWindow();
+      const slotsList = buildSlots(consultWindow.start, consultWindow.end);
 
       slotsList.forEach(slot => {
-        const converted = getTimezoneTime(slot, selectedCountry);
+        const converted = getTimezoneTime(slot);
         const pill = document.createElement('button');
         pill.classList.add('wizard-slot-pill');
         pill.innerText = converted;
@@ -587,6 +650,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         slotsTimeGrid.appendChild(pill);
       });
+
+      if (!slotsList.length) {
+        slotsTimeGrid.innerHTML = '<p style="color: var(--text-secondary);">No slots available for this selection.</p>';
+      }
     };
 
     // Step 4: Checkout Summary Update
