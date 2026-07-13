@@ -461,12 +461,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         doctorName = 'Ms. Ananya Sen';
         if (step2Heading) step2Heading.innerText = 'Select Nutrition Specialist';
+      } else if (type === 'In-Clinic Consultation') {
+        if (docNutritionist) docNutritionist.style.display = 'none';
+        if (docJyo) docJyo.style.display = 'none';
+        if (docKalyan) docKalyan.style.display = 'block';
+        
+        // Select Dr. Kalyan as default/only doctor for in-clinic
+        if (docNutritionist && docJyo && docKalyan) {
+          docKalyan.classList.add('active');
+          docJyo.classList.remove('active');
+          docNutritionist.classList.remove('active');
+        }
+        doctorName = 'Dr. Kalyan C. Battineni';
+        if (step2Heading) step2Heading.innerText = 'Select Pediatrician';
       } else {
         if (docNutritionist) docNutritionist.style.display = 'none';
         if (docJyo) docJyo.style.display = 'block';
         if (docKalyan) docKalyan.style.display = 'block';
         
-        // Default to Dr Jyo
+        // Default to Dr Jyo for telehealth
         if (docNutritionist && docJyo && docKalyan) {
           docJyo.classList.add('active');
           docNutritionist.classList.remove('active');

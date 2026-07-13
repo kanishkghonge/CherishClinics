@@ -304,38 +304,57 @@ header .logo-container {
   gap: 0.6rem;
 }
 
-header .logo-container .logo-svg {
-  width: 32px;
-  height: 32px;
-  fill: var(--sage-green);
+/* Brand Text Logo matching mockup */
+.logo-brand-link {
+  display: inline-block;
+  text-decoration: none;
 }
 
-header .logo-container .logo-img {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-header .logo-container h1 {
-  font-family: var(--font-logo);
-  font-size: 1.85rem;
-  font-weight: 500;
-  letter-spacing: -0.5px;
-  line-height: 1.1;
+.logo-brand {
   display: flex;
   flex-direction: column;
+  line-height: 0.95;
 }
 
-header .logo-container h1 span.clinic-sub {
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: none;
-  letter-spacing: 0.2px;
-  color: var(--terracotta-rose);
-  margin-top: -3px;
+.logo-cherish {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 1.85rem;
+  color: #105aa3; /* vibrant logo blue */
+  display: inline-flex;
+  align-items: center;
+  position: relative;
 }
+
+.logo-heart {
+  width: 14px;
+  height: 14px;
+  stroke: #e67786; /* pink outline */
+  margin-left: 2px;
+  align-self: flex-start;
+  margin-top: 3px;
+  transform: rotate(5deg);
+}
+
+.logo-health {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: #e67786; /* pink text */
+  letter-spacing: 4px;
+  margin-top: -1px;
+  padding-left: 2px;
+}
+
+.logo-subline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
 
 /* Nav Menu Desktop */
 .nav-menu {
@@ -635,27 +654,53 @@ header .logo-container h1 span.clinic-sub {
   display: block;
 }
 
-.badge-bullets-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.founder-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
 }
 
-.badge-bullets-list li {
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
+.founder-badges-grid .badge-tag:last-child {
+  grid-column: span 2;
+  justify-content: center;
+}
+
+.badge-tag {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background-color: var(--bg-sage-light);
+  border: 1px solid var(--border-color);
+  padding: 0.45rem 0.6rem;
+  border-radius: 12px;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.4rem;
+  line-height: 1.2;
 }
 
-.badge-bullets-list li svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--terracotta-rose);
+.badge-tag i {
+  color: var(--terracotta-rose);
+  font-size: 0.8rem;
   flex-shrink: 0;
 }
+
+.founder-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.founder-card-inperson {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--terracotta-rose);
+  margin-top: 0.25rem;
+}
+
 
 .hero-contact-strip {
   border-top: 1px solid var(--border-color);
