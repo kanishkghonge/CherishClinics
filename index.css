@@ -62,11 +62,34 @@ body {
   flex-direction: column;
   opacity: 0;
   animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  background-image: none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 232, 223, 0.7), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(255, 242, 210, 0.72), transparent 28%),
+    linear-gradient(120deg, #faf7ef, #fff8e7, #f7fbff, #fff1f5);
+  background-size: 140% 140%, 130% 130%, 220% 220%;
+  animation:
+    pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    ambientGradient 26s ease-in-out infinite;
 }
 
 @keyframes pageFadeIn {
   to { opacity: 1; }
+}
+
+@keyframes ambientGradient {
+  0%, 100% {
+    background-position: 0% 20%, 100% 0%, 0% 50%;
+  }
+
+  50% {
+    background-position: 28% 0%, 72% 28%, 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: pageFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 }
 
 /* Typography */
@@ -167,6 +190,10 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+}
+
+.home-container {
+  padding-top: 0;
 }
 
 .page-header {
@@ -355,6 +382,10 @@ header .logo-container {
   margin-top: 2px;
 }
 
+#main-header .logo-subline {
+  display: none;
+}
+
 
 /* Nav Menu Desktop */
 .nav-menu {
@@ -506,7 +537,7 @@ header .logo-container {
   grid-template-columns: 1.1fr 0.9fr;
   gap: 4rem;
   align-items: center;
-  padding: 4.5rem 0 6rem 0;
+  padding: 0.5rem 0 6rem 0;
   position: relative;
 }
 
@@ -660,11 +691,6 @@ header .logo-container {
   gap: 0.6rem;
 }
 
-.founder-badges-grid .badge-tag:last-child {
-  grid-column: span 2;
-  justify-content: center;
-}
-
 .badge-tag {
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -676,8 +702,10 @@ header .logo-container {
   border-radius: 12px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
   line-height: 1.2;
+  text-align: center;
 }
 
 .badge-tag i {
@@ -2306,6 +2334,10 @@ footer {
   .page-container {
     padding: 2.5rem 1.25rem 4rem 1.25rem;
   }
+
+  .home-container {
+    padding-top: 0;
+  }
   
   .page-header h2 {
     font-size: 2.25rem;
@@ -2462,7 +2494,7 @@ footer {
   }
   
   .hero-split {
-    padding: 1.5rem 0 3rem 0;
+    padding: 0.75rem 0 3rem 0;
     gap: 2rem;
   }
   

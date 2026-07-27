@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book an Appointment - Cherish Health</title>
-  <meta name="description" content="Schedule a consultation at Cherish Children's Clinic. Book in-clinic or online visits with Dr. Jyothirmayi Kavipurapu or Dr. Kalyan C. Battineni.">
-  <meta name="keywords" content="book pediatrician online, child specialist scheduler hyderabad, telehealth pediatrician, clinic slot booking kondapur">
+  <meta name="description" content="Schedule an online consultation at Cherish Health with Dr. Jyothirmayi Kavipurapu or our clinical dietitian.">
+  <meta name="keywords" content="book pediatrician online, telehealth pediatrician, online pediatric consultation, child nutrition consultation">
   <meta name="author" content="Dr. K Jyothirmayi">
   
   <!-- FontAwesome Icons CDN -->
@@ -70,7 +70,7 @@
         <div class="logo-brand">
           <span class="logo-cherish">Cherish<svg class="logo-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
           <span class="logo-health">HEALTH</span>
-          <span class="logo-subline">Child • Teen • Parent Wellness</span>
+          <span class="logo-subline">Online Pediatric Care</span>
         </div>
       </a>
     </div>
@@ -128,7 +128,7 @@
       <!-- Page Header -->
       <div class="page-header">
         <h2>Book an <span class="highlight-rose">Appointment</span></h2>
-        <p>Complete the step-by-step scheduler wizard below to secure a consulting slot.</p>
+        <p>Complete the step-by-step scheduler below to secure an online consulting slot.</p>
       </div>
 
       <!-- Booking Wizard Form card -->
@@ -147,23 +147,13 @@
         <div class="booking-panel-slide active" id="booking-step-1">
           <h3 style="margin-bottom: 2rem; text-align: center;">Choose Appointment Type</h3>
           <div class="consult-grid-cards">
-            <!-- Option 1 -->
-            <div class="consult-card-option glass-card active" id="type-offline">
-              <svg viewBox="0 0 24 24">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 15h-2v-4H7v-2h3V7h2v5h3v2h-3v4z"/>
-              </svg>
-              <h3>In-Clinic Consultation</h3>
-              <p style="font-size: 0.9rem;">Visit our child-friendly Kondapur clinic for physical screenings, immediate care, or routine immunizations.</p>
-            </div>
-            <!-- Option 2 -->
-            <div class="consult-card-option glass-card" id="type-tele">
+            <div class="consult-card-option glass-card active" id="type-tele">
               <svg viewBox="0 0 24 24">
                 <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm-9 12l-4-4h8l-4 4z"/>
               </svg>
               <h3>Telehealth Video Consult</h3>
               <p style="font-size: 0.9rem;">Schedule a secure remote video consultation from the comfort of your home to review non-urgent topics or dietary plans.</p>
             </div>
-            <!-- Option 3 -->
             <div class="consult-card-option glass-card" id="type-nutrition">
               <svg viewBox="0 0 24 24">
                 <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.04 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9 0-4.97-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
@@ -176,9 +166,8 @@
 
         <!-- Step 2 Panel: Doctor Selection -->
         <div class="booking-panel-slide" id="booking-step-2">
-          <h3 id="step-2-heading" style="margin-bottom: 2rem; text-align: center;">Select Pediatrician</h3>
+          <h3 id="step-2-heading" style="margin-bottom: 2rem; text-align: center;">Select Online Consultant</h3>
           <div class="doctor-select-grid">
-            <!-- Doctor 1 -->
             <div class="doctor-select-card glass-card active" id="doc-jyo">
               <img src="photos/dr jyothir mayi latest photo.jpeg" alt="Dr. Jyothirmayi Kavipurapu" class="doc-avatar-img">
               <div class="doc-card-details">
@@ -187,22 +176,12 @@
                 <p class="exp">MBBS, MD | 10+ Yrs Experience</p>
               </div>
             </div>
-            <!-- Doctor 2 -->
-            <div class="doctor-select-card glass-card" id="doc-kalyan">
-              <img src="photos/dr kalyan c .jpeg" alt="Dr. Kalyan C. Battineni" class="doc-avatar-img">
-              <div class="doc-card-details">
-                <p class="dept">Associate Professor / Consultant</p>
-                <h3>Dr. Kalyan C. Battineni</h3>
-                <p class="exp">MBBS, MD | 10 Yrs Experience</p>
-              </div>
-            </div>
-            <!-- Doctor 4 (Nutritionist, only visible when Nutritionist Teleconsult selected) -->
             <div class="doctor-select-card glass-card" id="doc-nutritionist" style="display: none;">
-              <div class="avatar-placeholder" style="background-color: var(--terracotta-rose); color: #fff;">AS</div>
+              <img src="photos/nutritionist.png" alt="P. Sai Snigdha Basu" class="doc-avatar-img">
               <div class="doc-card-details">
-                <p class="dept">Clinical Pediatric Dietitian</p>
-                <h3>Ms. Ananya Sen</h3>
-                <p class="exp">MSc Food & Nutrition | 8 Yrs Experience</p>
+                <p class="dept">Celebrity Clinical Dietitian</p>
+                <h3>P. Sai Snigdha Basu</h3>
+                <p class="exp">M.Sc. Clinical Nutrition and Dietetics</p>
               </div>
             </div>
           </div>
@@ -233,7 +212,7 @@
               
               <div class="checkout-summary-row">
                 <span style="color: var(--text-secondary);">Consultation Type</span>
-                <strong id="sum-type">In-Clinic Consultation</strong>
+                <strong id="sum-type">Telehealth Video Consult</strong>
               </div>
               <div class="checkout-summary-row">
                 <span style="color: var(--text-secondary);">Pediatrician</span>
@@ -249,12 +228,12 @@
               </div>
               <div class="checkout-summary-row">
                 <span style="color: var(--text-secondary);">Consultation Fee</span>
-                <span id="sum-fee">₹800.00</span>
+                <span id="sum-fee">₹1100.00</span>
               </div>
               
               <div class="checkout-summary-row total-row">
                 <span>Total Due</span>
-                <span id="sum-total">₹800.00</span>
+                <span id="sum-total">₹1100.00</span>
               </div>
             </div>
 
@@ -348,7 +327,7 @@
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
           </svg>
           <h2>Appointment Scheduled!</h2>
-          <p id="booking-success-message">Congratulations! Your In-Clinic Consultation with Dr. K. Jyothirmayi is fully confirmed for Monday, Jun 8, 2026 at 10:30 AM. A receipt and instructions calendar slip have been messaged to your registered phone number.</p>
+          <p id="booking-success-message">Congratulations! Your online consultation with Dr. K. Jyothirmayi is fully confirmed for Monday, Jun 8, 2026 at 8:00 PM IST. A receipt and instructions calendar slip have been messaged to your registered phone number.</p>
           <a href="index.html" class="btn-primary" style="padding: 0.85rem 3rem;">Return Home</a>
         </div>
 
@@ -371,10 +350,10 @@
           <div class="logo-brand">
             <span class="logo-cherish">Cherish<svg class="logo-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
             <span class="logo-health">HEALTH</span>
-            <span class="logo-subline" style="margin-bottom: 0.5rem;">Child • Teen • Parent Wellness</span>
+            <span class="logo-subline" style="margin-bottom: 0.5rem;">Online Pediatric Care</span>
           </div>
         </a>
-        <p style="margin-bottom: 0.5rem;">Cherish Children’s Clinic was established on March 30, 2019, as a trusted pediatric clinic in Kondapur, Hyderabad. After serving children and parents through physical consultations, Cherish is now evolving into Cherish Health — a digital wellness platform created to support parents in India and across the world through online consultations, parenting guidance, digital courses and trusted child-health resources. Our goal is to help parents raise healthier, happier children with more confidence.</p>
+        <p style="margin-bottom: 0.5rem;">Cherish Health is an online pediatric and family wellness platform created to support parents in India and across the world through online consultations, nutrition guidance, parenting support, digital courses, and trusted child-health resources. Our goal is to help parents raise healthier, happier children with more confidence.</p>
         <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">
           <i class="fa-solid fa-phone" style="margin-right: 5px; color: var(--sage-green);"></i> <a href="tel:9986777109" style="color: inherit;">9986777109</a><br>
           <i class="fa-solid fa-envelope" style="margin-right: 5px; color: var(--sage-green);"></i> <a href="mailto:cherishkondapur@gmail.com" style="color: inherit; text-decoration: underline;">cherishkondapur@gmail.com</a>
@@ -390,7 +369,7 @@
         <ul class="footer-links-list">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="services.html">Clinic Services</a></li>
+          <li><a href="services.html">Online Services</a></li>
           <li><a href="nutrition.html">Nutrition</a></li>
           <li><a href="testimonials.html">Testimonials</a></li>
         </ul>

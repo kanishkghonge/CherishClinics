@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookingStepperMax = 4;
 
   // Booking states
-  let consultType = 'In-Clinic Consultation';
+  let consultType = 'Telehealth Video Consult';
   let doctorName = 'Dr. K. Jyothirmayi';
   let appointmentDate = '';
   let appointmentTime = '';
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const getPriceForSelectedDoctor = () => {
-    return selectedCountry === 'in' ? 800 : 1500;
+    return selectedCountry === 'in' ? 1100 : 1500;
   };
 
   // DOM Elements
@@ -386,12 +386,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const stepFillLine = document.getElementById('booking-progress-fill');
   
   // step cards selection
-  const offlineCard = document.getElementById('type-offline');
   const teleCard = document.getElementById('type-tele');
   const nutritionCard = document.getElementById('type-nutrition');
   
   const docJyo = document.getElementById('doc-jyo');
-  const docKalyan = document.getElementById('doc-kalyan');
   const docNutritionist = document.getElementById('doc-nutritionist');
   const step2Heading = document.getElementById('step-2-heading');
 
@@ -400,22 +398,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const tzConfirmBtn = document.getElementById('timezone-modal-confirm');
   const countrySelector = document.getElementById('country-selector');
 
-  const isForeignCountry = () => selectedCountry !== 'in';
-
   const applyCountryConsultVisibility = () => {
-    if (!offlineCard || !teleCard || !nutritionCard) return;
-
-    if (isForeignCountry()) {
-      offlineCard.style.display = 'none';
-      if (consultType === 'In-Clinic Consultation') {
-        consultType = 'Telehealth Video Consult';
-        teleCard.classList.add('active');
-        offlineCard.classList.remove('active');
-        nutritionCard.classList.remove('active');
-      }
-    } else {
-      offlineCard.style.display = '';
-    }
+    if (!teleCard || !nutritionCard) return;
+    teleCard.classList.add('active');
+    nutritionCard.classList.remove('active');
+    consultType = 'Telehealth Video Consult';
   };
 
   // Timezone popup modal interactions
@@ -439,8 +426,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Step 1 toggling
     const selectConsultType = (type, activeCard, inactiveCards) => {
-      if (type === 'In-Clinic Consultation' && isForeignCountry()) return;
-
       consultType = type;
       activeCard.classList.add('active');
       inactiveCards.forEach(card => card.classList.remove('active'));
@@ -451,72 +436,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (type === 'Nutritionist Teleconsult') {
         if (docNutritionist) docNutritionist.style.display = 'block';
         if (docJyo) docJyo.style.display = 'none';
-        if (docKalyan) docKalyan.style.display = 'none';
         
-        // Select Nutritionist as default doctor
-        if (docNutritionist && docJyo && docKalyan) {
+        if (docNutritionist && docJyo) {
           docNutritionist.classList.add('active');
           docJyo.classList.remove('active');
-          docKalyan.classList.remove('active');
         }
-        doctorName = 'Ms. Ananya Sen';
+        doctorName = 'P. Sai Snigdha Basu';
         if (step2Heading) step2Heading.innerText = 'Select Nutrition Specialist';
-      } else if (type === 'In-Clinic Consultation') {
-        if (docNutritionist) docNutritionist.style.display = 'none';
-        if (docJyo) docJyo.style.display = 'none';
-        if (docKalyan) docKalyan.style.display = 'block';
-        
-        // Select Dr. Kalyan as default/only doctor for in-clinic
-        if (docNutritionist && docJyo && docKalyan) {
-          docKalyan.classList.add('active');
-          docJyo.classList.remove('active');
-          docNutritionist.classList.remove('active');
-        }
-        doctorName = 'Dr. Kalyan C. Battineni';
-        if (step2Heading) step2Heading.innerText = 'Select Pediatrician';
       } else {
         if (docNutritionist) docNutritionist.style.display = 'none';
         if (docJyo) docJyo.style.display = 'block';
-        if (docKalyan) docKalyan.style.display = 'block';
         
-        // Default to Dr Jyo for telehealth
-        if (docNutritionist && docJyo && docKalyan) {
+        if (docNutritionist && docJyo) {
           docJyo.classList.add('active');
           docNutritionist.classList.remove('active');
-          docKalyan.classList.remove('active');
         }
         doctorName = 'Dr. K. Jyothirmayi';
-        if (step2Heading) step2Heading.innerText = 'Select Pediatrician';
+        if (step2Heading) step2Heading.innerText = 'Select Online Consultant';
       }
     };
 
-    if (offlineCard && teleCard && nutritionCard) {
+    if (teleCard && nutritionCard) {
       applyCountryConsultVisibility();
-      offlineCard.addEventListener('click', () => selectConsultType('In-Clinic Consultation', offlineCard, [teleCard, nutritionCard]));
-      teleCard.addEventListener('click', () => selectConsultType('Telehealth Video Consult', teleCard, [offlineCard, nutritionCard]));
-      nutritionCard.addEventListener('click', () => selectConsultType('Nutritionist Teleconsult', nutritionCard, [offlineCard, teleCard]));
+      teleCard.addEventListener('click', () => selectConsultType('Telehealth Video Consult', teleCard, [nutritionCard]));
+      nutritionCard.addEventListener('click', () => selectConsultType('Nutritionist Teleconsult', nutritionCard, [teleCard]));
     }
 
     // Step 2 toggling
-    if (docJyo && docKalyan && docNutritionist) {
+    if (docJyo && docNutritionist) {
       docJyo.addEventListener('click', () => {
         docJyo.classList.add('active');
-        docKalyan.classList.remove('active');
         docNutritionist.classList.remove('active');
         doctorName = 'Dr. K. Jyothirmayi';
-        appointmentDate = '';
-        appointmentTime = '';
-        if (activeStep === 3) {
-          generateWizardDates();
-          generateWizardTimeSlots();
-        }
-      });
-
-      docKalyan.addEventListener('click', () => {
-        docKalyan.classList.add('active');
-        docJyo.classList.remove('active');
-        docNutritionist.classList.remove('active');
-        doctorName = 'Dr. Kalyan C. Battineni';
         appointmentDate = '';
         appointmentTime = '';
         if (activeStep === 3) {
@@ -528,8 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
       docNutritionist.addEventListener('click', () => {
         docNutritionist.classList.add('active');
         docJyo.classList.remove('active');
-        docKalyan.classList.remove('active');
-        doctorName = 'Ms. Ananya Sen';
+        doctorName = 'P. Sai Snigdha Basu';
         appointmentDate = '';
         appointmentTime = '';
         if (activeStep === 3) {
@@ -569,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const start = parseTimeToMinutes(startTime);
       const end = parseTimeToMinutes(endTime);
 
-      for (let time = start; time < end; time += 15) {
+      for (let time = start; time < end; time += 30) {
         slots.push(formatMinutesToTime(time));
       }
 
@@ -577,25 +527,17 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getConsultWindow = () => {
-      const config = countryConfig[selectedCountry] || countryConfig.in;
-
-      if (doctorName === 'Dr. Kalyan C. Battineni') {
-        return { days: [1, 2, 3, 4, 5, 6], start: '5:30 PM', end: '8:00 PM' };
+      if (doctorName === 'P. Sai Snigdha Basu') {
+        return { days: [1, 2, 3, 4, 5, 6], windows: [{ start: '5:30 PM', end: '10:00 PM' }] };
       }
 
-      if (doctorName === 'Ms. Ananya Sen') {
-        return { days: [1, 2, 3, 4, 5, 6], start: '5:30 PM', end: '8:00 PM' };
-      }
-
-      if (consultType === 'In-Clinic Consultation') {
-        return { days: [1, 2, 3, 4, 5, 6], start: '9:00 AM', end: '2:00 PM' };
-      }
-
-      if (config.region === 'international') {
-        return { days: [2, 4], start: '8:00 PM', end: '9:00 PM' };
-      }
-
-      return { days: [1, 3, 5], start: '2:30 PM', end: '3:30 PM' };
+      return {
+        days: [1, 2, 3, 4, 5],
+        windows: [
+          { start: '2:30 PM', end: '3:30 PM' },
+          { start: '8:00 PM', end: '9:00 PM' }
+        ]
+      };
     };
 
     const generateWizardDates = () => {
@@ -647,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
       slotsTimeGrid.innerHTML = '';
       appointmentTime = ''; // reset on date change
       const consultWindow = getConsultWindow();
-      const slotsList = buildSlots(consultWindow.start, consultWindow.end);
+      const slotsList = consultWindow.windows.flatMap(window => buildSlots(window.start, window.end));
 
       slotsList.forEach(slot => {
         const converted = getTimezoneTime(slot);
